@@ -15,14 +15,13 @@ class FormController {
             if ($this->validateFormData($data)) {
                 // Appeler le modèle pour gérer les données
                 $model = new Admin();
-                $model->connectUser($_POST["username"], $_POST["password"]);
-                
+                $table = $model->connectUser($_POST["username"], $_POST["password"]);
+                Vue::montrer('public/list-table', $table);
                 // Rediriger l'utilisateur vers une page de confirmation
-                header("Location: confirmation.php");
-                exit();
             } else {
                 // Afficher une erreur si les données ne sont pas valides
                 echo "Les données du formulaire ne sont pas valides !";
+                exit();
             }
         }
     }

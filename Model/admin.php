@@ -54,7 +54,7 @@ class Admin {
         } else {
             echo "L'utilisateur $username n'existe pas !";
         }
-
+        return $table;
 
     }
 
