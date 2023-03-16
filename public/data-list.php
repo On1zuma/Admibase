@@ -15,9 +15,12 @@
 <nav class="navbar navbar-dark bg-primary">
   <a class="navbar-brand" href="/">AdmiBase</a>
 
-  <ul class="navbar-nav mr-auto">
+  <ul class="navbar-nav mr-auto" style="display:flex; flex-direction:row; gap:1rem;">
     <li class="nav-item active">
         <a class="nav-link" href="/list-table.php">Table list</a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="#"> PhpMyAdmin</a>
     </li>
   </ul>
 </nav>

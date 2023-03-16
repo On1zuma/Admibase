@@ -15,9 +15,12 @@
 <nav class="navbar navbar-dark bg-primary">
   <a class="navbar-brand" href="/">AdmiBase</a>
 
-  <ul class="navbar-nav mr-auto">
+  <ul class="navbar-nav mr-auto" style="display:flex; flex-direction:row; gap:1rem;">
     <li class="nav-item active">
         <a class="nav-link" href="/list-table.php">Table list</a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="#"> PhpMyAdmin</a>
     </li>
   </ul>
 </nav>
@@ -41,7 +44,8 @@
             <div class="card-body">
                 <h5 class="card-title">Admin account</h5>
                 <p class="card-text">An admin, short for administrator, is a user with the highest level of access and control over a system or platform.</p>
-                <a  href="#" class="btn btn-primary button-go">Redirect</a>
+                <p class="card-text">Login : xxxxx</p>
+                <p class="card-text">Password : xxxxx</p>            
             </div>
         </div>
 
