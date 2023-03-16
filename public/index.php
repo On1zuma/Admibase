@@ -11,6 +11,5 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
   INDEX
 </div>
 
-</body>
-</html>
+<?php include('./components/footer.php'); ?>
 

@@ -108,6 +108,5 @@ if (isset($_POST['send'])) {
     }
 </style>
 
-</body>
-</html>
+<?php include('./components/footer.php'); ?>
 

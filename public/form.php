@@ -30,6 +30,4 @@ if (empty($_SESSION['id'])) {
   </form>
 </div>
 
-</body>
-</html>
-
+<?php include('./components/footer.php'); ?>

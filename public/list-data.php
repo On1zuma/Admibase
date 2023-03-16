@@ -79,6 +79,6 @@ if (empty($_SESSION['id'])) {
   }
     }
 </style>
-</body>
-</html>
+
+<?php include('./components/footer.php'); ?>
 
