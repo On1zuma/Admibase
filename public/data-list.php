@@ -1,4 +1,10 @@
-<?php ?>
+<?php
+
+session_start();
+if (empty($_SESSION['id'])) {
+    header('Location: /');
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +27,9 @@
     </li>
     <li class="nav-item active">
         <a class="nav-link" href="#"> PhpMyAdmin</a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="/logout.php"> Logout</a>
     </li>
   </ul>
 </nav>
