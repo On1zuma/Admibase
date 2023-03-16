@@ -23,49 +23,58 @@
 </nav>
 
 <div class="mx-auto" style="width: 70vw; margin-top: 2rem;">
-
-<div class="filter" style="margin-bottom: 1rem; display:flex; align-items:center; flex-direction:row; justify-content:space-between;">
-  <span class="label label-default" style="font-weight: 900;">Our base TITLE</span>
-  <div style="display:flex; align-items:center; flex-direction:row; justify-content:space-between; gap:1rem">
-    <input type="text" class="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1">
-    <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+  <div class="filter" style="margin-bottom: 1rem; display:flex; align-items:center; flex-direction:row; justify-content:space-between;">
+    <span class="label label-default" style="font-weight: 900;">Our base TITLE</span>
+    <div style="display:flex; align-items:center; flex-direction:row; justify-content:space-between; gap:1rem">
+      <input type="text" class="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1">
+      <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+    </div>
   </div>
-</div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-      <td><a href=""> </a></td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+        <td><a href=""> </a></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row"><input type="checkbox" value="" ></th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+        <td><a href="">Edit</a></td>
+      </tr>
+      <tr>
       <th scope="row"><input type="checkbox" value="" ></th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td><a href="">Edit</a></td>
-    </tr>
-    <tr>
-    <th scope="row"><input type="checkbox" value="" ></th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td><a href="">Edit</a></td>
-    </tr>
-    <tr>
-    <th scope="row"><input type="checkbox" value="" ></th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-      <td><a href="">Edit</a></td>
-    </tr>
-  </tbody>
-</table>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+        <td><a href="">Edit</a></td>
+      </tr>
+      <tr>
+      <th scope="row"><input type="checkbox" value="" ></th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+        <td><a href="">Edit</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
 </div>
 
 
