@@ -1,6 +1,6 @@
 <?php
 
-include('navbar.php');
+include('./components/navbar.php');
 
 if (empty($_SESSION['id'])) {
     header('Location: /');
