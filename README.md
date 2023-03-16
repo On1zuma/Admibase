@@ -7,5 +7,33 @@
 
 ## BRANCH
 
-git pull // to update 
+git pull // to update
 git switch "branch name" // to select the good branch
+
+## PUBLIC CONFIG
+
+- Pour utiliser les nouvelles url (elles ne sont pas obligatoire) il faut créer un virtualhost:
+
+  Clic Gauche sur l'icon de wamp => Vos VirtualHosts => Gestion VirtualHost
+
+ou en allant ici : http://localhost/add_vhost.php
+
+    Dans "Nom du Virtual Host" vous mettez un nom qui remplacera localhost (localhost fonctionnera toujours)
+
+    Exemple : adminbase
+
+    Dans "Chemin complet absolu du dossier VirtualHost" vous mettez le chemin à la racine de votre projet
+
+    Exemple : C:\wamp64\www\SIBD\public\
+
+    Vous cliquez sur "Démarrer la création ou la modification du VirtualHost"
+
+- Enfin il faut redémarrer les DNS:
+
+  Clic droit sur l'icon wamp => outils => Redémarrage DNS
+
+- Pour tester (avec le nom du virtualhost choisi):
+
+  http://adminbase/
+
+La page doit s'afficher.
