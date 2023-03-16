@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+
 <nav class="navbar navbar-dark bg-primary">
   <a class="navbar-brand" href="/">AdmiBase</a>
 
@@ -23,16 +23,16 @@
 </nav>
 
 <div class="mx-auto" style="width: 70vw; margin-top: 2rem;">
-    <form style="margin-bottom: 2rem;">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Login</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="loginHelp" placeholder="Enter login">
-            <small id="loginHelp" class="form-text text-muted">We'll never share your data with anyone else.</small>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
+    <form style="margin-bottom: 2rem;" action="../Controller/connectionController.php" method="post">
+    <div class="form-group">
+        <label for="username">Login</label>
+        <input type="text" class="form-control" id="username" aria-describedby="loginHelp" placeholder="Enter login">
+        <small id="loginHelp" class="form-text text-muted">We'll never share your data with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password">
+    </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
