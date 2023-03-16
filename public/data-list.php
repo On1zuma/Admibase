@@ -27,7 +27,8 @@
     <span class="label label-default" style="font-weight: 900;">Our base TITLE</span>
     <div style="display:flex; align-items:center; flex-direction:row; justify-content:space-between; gap:1rem">
       <input type="text" class="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1">
-      <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+      <a href="/form.php" type="button" class="btn btn-primary text-white"><span class="glyphicon glyphicon-remove"></span> Create</a>
+      <a type="button" class="btn btn-danger text-white"><span class="glyphicon glyphicon-remove"></span> Delete</a>
     </div>
   </div>
 
@@ -35,11 +36,12 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-        <td><a href=""> </a></td>
+        <th scope="col"><a href="">First</a></th>
+        <th scope="col"><a href="">Handle</a></th>
+        <th scope="col"><a href="">Last (to filter by)</a></th>
+        <th><a href=""></a></th>
       </tr>
+
     </thead>
     <tbody>
       <tr>
@@ -47,21 +49,21 @@
         <td>Mark</td>
         <td>Otto</td>
         <td>@mdo</td>
-        <td><a href="">Edit</a></td>
+        <td><a href="/form.php">Edit</a></td>
       </tr>
       <tr>
       <th scope="row"><input type="checkbox" value="" ></th>
         <td>Jacob</td>
         <td>Thornton</td>
         <td>@fat</td>
-        <td><a href="">Edit</a></td>
+        <td><a href="/form.php">Edit</a></td>
       </tr>
       <tr>
       <th scope="row"><input type="checkbox" value="" ></th>
         <td>Larry</td>
         <td>the Bird</td>
         <td>@twitter</td>
-        <td><a href="">Edit</a></td>
+        <td><a href="/form.php">Edit</a></td>
       </tr>
     </tbody>
   </table>
