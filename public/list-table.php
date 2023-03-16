@@ -1,8 +1,13 @@
 <?php
 
- $tables = ["Horse", "House", "Cars", "Race","other"];
+session_start();
+if (empty($_SESSION['id'])) {
+    header('Location: /');
+}
 
- ?>
+$tables = ["Horse", "House", "Cars", "Race","other"];
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +31,9 @@
     <li class="nav-item active">
         <a class="nav-link" href="#"> PhpMyAdmin</a>
     </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="/logout.php"> Logout</a>
+    </li>
   </ul>
 </nav>
 
@@ -34,7 +42,7 @@
   <?php  foreach ($tables as $table) {
       echo "<li class='list-group-item'><a href='/data-list.php?table=".$table."'>".$table."</a></li>";
   }
- ?>
+?>
   </ul>
 </div>
 

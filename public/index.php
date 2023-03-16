@@ -1,8 +1,10 @@
 <?php
+
 session_start();
-if ($_SESSION['id']) {
+if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
     header('Location: list-table.php');
 }
+
 
 $bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
 if (isset($_POST['send'])) {
