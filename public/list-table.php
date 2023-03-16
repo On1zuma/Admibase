@@ -1,4 +1,8 @@
-<?php ?>
+<?php
+
+ $tables = ["Horse", "House", "Cars", "Race","other"];
+
+ ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,11 +28,10 @@
 
 <div class="mx-auto" style="width: 70vw; margin-top: 2rem;">
   <ul class="list-group">
-    <li class="list-group-item"><a href="/data-list.php">Cras justo odio</a></li>
-    <li class="list-group-item"><a href="/data-list.php">Cras justo odio</a></li>
-    <li class="list-group-item"><a href="/data-list.php">Cras justo odio</a></li>
-    <li class="list-group-item"><a href="/data-list.php">Cras justo odio</a></li>
-    <li class="list-group-item"><a href="/data-list.php">Cras justo odio</a></li>
+  <?php  foreach ($tables as $table) {
+      echo "<li class='list-group-item'><a href='/data-list.php?table=".$table."'>".$table."</a></li>";
+  }
+ ?>
   </ul>
 </div>
 
