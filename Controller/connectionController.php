@@ -1,6 +1,10 @@
 <?php
 
-require_once 'Model/admin.php';
+// require_once 'Model/admin.php';
+require_once '../Model/admin.php';
+// require_once '../Vue/Vue.php';
+// require_once '../Controller/FormController.php';
+echo 'Ici';
 
 class FormController
 {
@@ -19,7 +23,7 @@ class FormController
                 // Appeler le modèle pour gérer les données
                 $model = new Admin();
                 $table = $model->connectUser($_POST["username"], $_POST["password"]);
-                Vue::montrer('public/list-table', $table);
+                header('Location: list-table.php');
             // Rediriger l'utilisateur vers une page de confirmation
             } else {
                 // Afficher une erreur si les données ne sont pas valides
