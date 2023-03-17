@@ -13,7 +13,7 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
             <h1 class="cover-heading">Welcome to AdmiBase</h1>
             <p class="lead">Admibase is a database management app that enables users, managers, and admins to add, update and manage data. It offers a user-friendly interface and customized access based on user status.</p>
             <p class="lead">
-              <a href="/login.php" class="btn btn-lg btn-secondary">Login</a>
+              <a href="login.php" class="btn btn-lg btn-secondary">Login</a>
             </p>
       </main>
     </div>
