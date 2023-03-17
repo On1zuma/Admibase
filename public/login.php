@@ -1,14 +1,19 @@
 <?php
+session_start();
 
 include('./components/navbar.php');
 
+
 if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
-    header('Location: list-table.php');
+    header("list-table.php");
 }
+print_r($_SESSION['id']);
 
 require_once '../Controller/connectionController.php';
-$formController = new FormController();
-$formController->handleFormSubmission();
+if (isset($_POST['send']) && empty($_SESSION['id'])) {
+    $objet = new FormController();
+    $objet->handleFormSubmission($_POST["login"], $_POST["password"]);
+}
 
 // $bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
 // if (isset($_POST['send']) && $_POST['send'] == 2) {
@@ -35,7 +40,7 @@ $formController->handleFormSubmission();
 ?>
 
 <div class="mx-auto" style="width: 70vw; margin-top: 2rem;">
-    <form style="margin-bottom: 2rem;" method="post" action="../Controller/connectionController.php">
+    <form style="margin-bottom: 2rem;" method="post" action=""> <?php //../Controller/connectionController.php ?>
         <div class="form-group">
             <label for="username">Login</label>
             <input type="text" class="form-control" id="username" aria-describedby="loginHelp" placeholder="Enter login" name="login">

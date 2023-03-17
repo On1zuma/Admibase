@@ -6,6 +6,8 @@ if (empty($_SESSION['id'])) {
     header('Location: /login.php');
 }
 
+print_r($_SESSION['id']);
+
 $tables = ["Horse", "House", "Cars", "Race","other"];
 
 ?>

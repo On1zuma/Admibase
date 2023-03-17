@@ -7,6 +7,7 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
 }
 ?>
 
+
 <div class="mx-auto" style="width: 70vw; margin-top: 9rem;">
     <div class="text-center" >
       <main role="main" class="inner cover">
