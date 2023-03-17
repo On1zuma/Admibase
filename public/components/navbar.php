@@ -27,9 +27,6 @@ session_start();
     <li class="nav-item active">
         <a class="nav-link" href="/login.php"> Login</a>
     </li>
-    <li class="nav-item active">
-        <a class="nav-link" href="/login.php"> Register</a>
-    </li>
     <?php endif; ?>
 
     <?php if (isset($_SESSION['id']) && !empty($_SESSION['id'])): // check if user is logged in so we only show that links?>
