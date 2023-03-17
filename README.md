@@ -4,11 +4,19 @@
 
 - cd .\public\
 - php -S localhost:8000
+  Warning, database will not work
 
 ## BRANCH
 
-git pull // to update
-git switch "branch name" // to select the good branch
+- git pull // to update
+- git switch branchName // to select the good branch
+  Warning, please remember that you have to start from the main branch to select one of our branches.
+
+## WAMP - XAMP - MAMP
+
+- Set up your project inside the "www" folder.
+- Launch Wamp, Xampp, or any other web server software you are using.
+- Then use the URL "http://localhost/SIBD/public/index.php" to access the project.
 
 ## PUBLIC CONFIG
 
@@ -34,6 +42,6 @@ ou en allant ici : http://localhost/add_vhost.php
 
 - Pour tester (avec le nom du virtualhost choisi):
 
-  http://adminbase/
+http://adminbase/
 
 La page doit s'afficher.
