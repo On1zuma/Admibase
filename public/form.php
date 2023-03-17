@@ -3,7 +3,7 @@
 include('./components/navbar.php');
 
 if (empty($_SESSION['id'])) {
-    header('Location: /');
+    header('Location: /login.php');
 }
 
 ?>
