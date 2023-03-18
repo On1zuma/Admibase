@@ -1,10 +1,8 @@
 <?php
 include('./components/navbar.php');
 
-if (empty($_SESSION['id'])) {
-    header('Location: login.php');
-    exit; // stop the script
-}
+$status = new RightController();
+$status->isLoggedIn();
 
 $table_name = $_SESSION['id']['table'];
 $bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');

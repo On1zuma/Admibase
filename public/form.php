@@ -2,9 +2,8 @@
 
 include('./components/navbar.php');
 
-if (empty($_SESSION['id'])) {
-    header('Location: /login.php');
-}
+$status = new RightController();
+$status->isLoggedIn();
 
 ?>
 

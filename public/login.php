@@ -1,13 +1,10 @@
 <?php
-
+require_once '../Controller/connectionController.php';
 include('./components/navbar.php');
 
+$status = new RightController();
+$status->isNotLoggedIn();
 
-if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
-    header("Location: list-table.php");
-}
-
-require_once '../Controller/connectionController.php';
 if (isset($_POST['send']) && empty($_SESSION['id'])) {
     $objet = new FormController();
     $objet->handleFormSubmission($_POST["login"], $_POST["password"]);

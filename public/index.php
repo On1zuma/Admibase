@@ -1,10 +1,9 @@
 <?php
-
 include('./components/navbar.php');
 
-if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
-    header('Location: list-table.php');
-}
+$status = new RightController();
+$status->isNotLoggedIn();
+
 ?>
 
 
