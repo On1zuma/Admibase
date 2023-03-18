@@ -4,8 +4,28 @@ include('./components/navbar.php');
 
 if (empty($_SESSION['id'])) {
     header('Location: login.php');
+    exit; // stop the script
 }
 
+$bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
+
+$table_name = $_SESSION['id']['table']; // users tables
+$tableUrl = $_GET['table']; // table set in the url
+$stmt = $bdd->prepare("SHOW TABLES");
+$stmt->execute();
+$tablesBd = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+// Check if the table exists in the database
+if (!in_array($tableUrl, $tablesBd)) {
+    header('Location: 404.php');
+    exit; // stop the script
+}
+
+// Check if the user has access to the table
+if ($table_name != "*" && !in_array($tableUrl, explode(", ", $table_name))) {
+    header('Location: list-table.php');
+    exit; // stop the script
+}
 ?>
 
 <div class="mx-auto" style="width: 70vw; margin-top: 2rem;">
