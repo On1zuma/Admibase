@@ -45,4 +45,31 @@ class DataController
         }
         return $tableUrl;
     }
+
+    public function listOfTableName($tableUrl)
+    {
+        $bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
+        // Get the column names for a table
+        $tableName = $tableUrl;
+        $stmt = $bdd->query("DESCRIBE $tableName");
+        $columns = array();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $columns[] = $row['Field'];
+        }
+
+        // Print the column names
+        return $columns;
+    }
+
+    public function listOfRowName($tableUrl)
+    {
+        $bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
+        $tableName = $tableUrl;
+        $stmt = $bdd->query("SELECT * FROM $tableName");
+        $rows = array();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
 }
