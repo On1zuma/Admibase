@@ -6,7 +6,7 @@ $status = new RightController();
 $status->isLoggedIn();
 
 $data = new DataController();
-$tableUrl = $tables = $data->checkIfUserCanAccessTable();
+$tableUrl = $data->checkIfUserCanAccessTable();
 
 $tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
 
