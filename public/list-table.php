@@ -3,7 +3,7 @@
 include('./components/navbar.php');
 
 if (empty($_SESSION['id'])) {
-    header('Location: /login.php');
+    header('Location: login.php');
 }
 
 $tables = ["Horse", "House", "Cars", "Race","other"];
@@ -13,7 +13,7 @@ $tables = ["Horse", "House", "Cars", "Race","other"];
 <div class="mx-auto" style="width: 70vw; margin-top: 2rem;">
   <ul class="list-group">
   <?php  foreach ($tables as $table) {
-      echo "<li class='list-group-item'><a href='/list-data.php?table=".$table."'>".$table."</a></li>";
+      echo "<li class='list-group-item'><a href='list-data.php?table=".$table."'>".$table."</a></li>";
   }
 ?>
   </ul>

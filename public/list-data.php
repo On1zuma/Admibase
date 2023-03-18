@@ -3,7 +3,7 @@
 include('./components/navbar.php');
 
 if (empty($_SESSION['id'])) {
-    header('Location: /login.php');
+    header('Location: login.php');
 }
 
 ?>
@@ -13,7 +13,7 @@ if (empty($_SESSION['id'])) {
     <span class="label label-default" style="font-weight: 900;">Our base TITLE</span>
     <div style="display:flex; align-items:center; flex-direction:row; justify-content:space-between; gap:1rem">
       <input type="text" class="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1">
-      <a href="/form.php" type="button" class="btn btn-primary text-white"><span class="glyphicon glyphicon-remove"></span> Create</a>
+      <a href="form.php" type="button" class="btn btn-primary text-white"><span class="glyphicon glyphicon-remove"></span> Create</a>
       <a type="button" class="btn btn-danger text-white"><span class="glyphicon glyphicon-remove"></span> Delete</a>
     </div>
   </div>
@@ -35,21 +35,21 @@ if (empty($_SESSION['id'])) {
         <td>Mark</td>
         <td>Otto</td>
         <td>@mdo</td>
-        <td><a href="/form.php">Edit</a></td>
+        <td><a href="form.php">Edit</a></td>
       </tr>
       <tr>
       <th scope="row"><input type="checkbox" value="" ></th>
         <td>Jacob</td>
         <td>Thornton</td>
         <td>@fat</td>
-        <td><a href="/form.php">Edit</a></td>
+        <td><a href="form.php">Edit</a></td>
       </tr>
       <tr>
       <th scope="row"><input type="checkbox" value="" ></th>
         <td>Larry</td>
         <td>the Bird</td>
         <td>@twitter</td>
-        <td><a href="/form.php">Edit</a></td>
+        <td><a href="form.php">Edit</a></td>
       </tr>
     </tbody>
   </table>
