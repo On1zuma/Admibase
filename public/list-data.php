@@ -7,6 +7,8 @@ $status->isLoggedIn();
 
 $data = new DataController();
 $tableUrl = $data->checkIfUserCanAccessTable();
+$columns = $data->listOfTableName($tableUrl);
+$rows = $data->listOfRowName($tableUrl);
 
 $tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
 
@@ -26,36 +28,28 @@ $tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col"><a href="">First</a></th>
-        <th scope="col"><a href="">Handle</a></th>
-        <th scope="col"><a href="">Last (to filter by)</a></th>
+        <?php foreach ($columns as $column) {
+            echo '<th scope="col"><a href="">'.$column.'</a></th>';
+        } ?>
         <th><a href=""></a></th>
       </tr>
 
     </thead>
     <tbody>
-      <tr>
-        <th scope="row"><input type="checkbox" value="" ></th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td><a href="form.php">Edit</a></td>
-      </tr>
-      <tr>
-      <th scope="row"><input type="checkbox" value="" ></th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td><a href="form.php">Edit</a></td>
-      </tr>
-      <tr>
-      <th scope="row"><input type="checkbox" value="" ></th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td><a href="form.php">Edit</a></td>
-      </tr>
-    </tbody>
+  <?php
+    $rows = $data->listOfRowName($tableUrl);
+foreach ($rows as $index => $row) {
+    echo "<tr>";
+    echo "<th scope='row'><input type='checkbox' value='id:". ($index + 1) ."' ></th>";
+    foreach ($columns as $column) {
+        echo "<td>" . $row[$column] . "</td>";
+    }
+    echo "<td><a href='form.php'>Edit</a></td>";
+    echo "</tr>";
+}
+?>
+</tbody>
+
   </table>
 
   <nav aria-label="Page navigation example">
