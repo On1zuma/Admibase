@@ -3,6 +3,7 @@ include('./components/navbar.php');
 
 if (empty($_SESSION['id'])) {
     header('Location: login.php');
+    exit; // stop the script
 }
 
 $table_name = $_SESSION['id']['table'];
@@ -11,13 +12,9 @@ $bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
 if ($table_name != "*") {
     $tables = explode(", ", $table_name);
 } else {
-    $getTables = $bdd->query('SHOW TABLES');
-    $tables = array();
-
-    while ($row = $getTables->fetch(PDO::FETCH_NUM)) {
-        $tableName = $row[0];
-        $tables[] = $tableName;
-    }
+    $stmt = $bdd->prepare("SHOW TABLES");
+    $stmt->execute();
+    $tables = $stmt->fetchAll(PDO::FETCH_COLUMN);
 }
 ?>
 
