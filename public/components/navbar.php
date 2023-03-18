@@ -1,3 +1,13 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
+    print_r($_SESSION['id']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

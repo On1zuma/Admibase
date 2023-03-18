@@ -49,15 +49,15 @@ class Admin
                 $this->user = $username;
                 $this->password = $userpassword;
                 @mysqli_connect($this->host, $this->user, $this->password, $this->database);
-                if(!mysqli_connect_errno()){
-                    session_start();
+                if (!mysqli_connect_errno()) {
                     $table = $this->rightUser($username);
                     $_SESSION['id'] = $table;
                     echo "L'utilisateur $username est maintenant connecté";
-                }   
-                else
+                    header("Location: list-table.php");
+                } else {
                     echo "Mauvais mot de passe";
-            } 
+                }
+            }
         } else {
             echo "L'utilisateur $username n'existe pas !";
         }
@@ -70,6 +70,10 @@ class Admin
 
         switch ($username) {
             case 'admin_db':
+                $tableAndRights['table'] = '*';
+                $tableAndRights['access'] = ['ALL PRIVILEGES'];
+                break;
+            case 'admin_db_test':
                 $tableAndRights['table'] = '*';
                 $tableAndRights['access'] = ['ALL PRIVILEGES'];
                 break;

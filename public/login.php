@@ -1,13 +1,11 @@
 <?php
-session_start();
 
 include('./components/navbar.php');
 
 
 if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
-    header("list-table.php");
+    header("Location: list-table.php");
 }
-print_r($_SESSION['id']);
 
 require_once '../Controller/connectionController.php';
 if (isset($_POST['send']) && empty($_SESSION['id'])) {
@@ -40,7 +38,7 @@ if (isset($_POST['send']) && empty($_SESSION['id'])) {
 ?>
 
 <div class="mx-auto" style="width: 70vw; margin-top: 2rem;">
-    <form style="margin-bottom: 2rem;" method="post" action=""> <?php //../Controller/connectionController.php ?>
+    <form style="margin-bottom: 2rem;" method="post" action=""> <?php //../Controller/connectionController.php?>
         <div class="form-group">
             <label for="username">Login</label>
             <input type="text" class="form-control" id="username" aria-describedby="loginHelp" placeholder="Enter login" name="login">
@@ -58,8 +56,8 @@ if (isset($_POST['send']) && empty($_SESSION['id'])) {
             <div class="card-body">
                 <h5 class="card-title">Admin account</h5>
                 <p class="card-text">An admin, short for administrator, is a user with the highest level of access and control over a system or platform.</p>
-                <p class="card-text">Login : xxxxx</p>
-                <p class="card-text">Password : xxxxx</p>            
+                <p class="card-text">Login : admin_db / admin_db_test</p>
+                <p class="card-text">Password : adminsecurite</p>            
             </div>
         </div>
 
