@@ -16,8 +16,9 @@ class DataController
         } else {
             $stmt = $bdd->prepare("SHOW TABLES");
             $stmt->execute();
-            return $tables = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            $tables = $stmt->fetchAll(PDO::FETCH_COLUMN);
         }
+        return $tables;
     }
 
     public function checkIfUserCanAccessTable()
