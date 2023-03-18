@@ -4,16 +4,9 @@ include('./components/navbar.php');
 $status = new RightController();
 $status->isLoggedIn();
 
-$table_name = $_SESSION['id']['table'];
-$bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
+$data = new DataController();
+$tables = $data->listOurTables();
 
-if ($table_name != "*") {
-    $tables = explode(", ", $table_name);
-} else {
-    $stmt = $bdd->prepare("SHOW TABLES");
-    $stmt->execute();
-    $tables = $stmt->fetchAll(PDO::FETCH_COLUMN);
-}
 ?>
 
 <div class="mx-auto" style="width: 70vw; margin-top: 2rem;">

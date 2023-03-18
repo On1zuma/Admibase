@@ -1,5 +1,6 @@
 <?php
 require_once '../Controller/rightController.php';
+require_once '../Controller/dataController.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -30,7 +31,7 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
         <a class="nav-link" href="#"> PhpMyAdmin</a>
     </li>
     <?php if (!isset($_SESSION['id'])): // check if user is not login so we show that link?>
-        <li class="nav-item active">
+    <li class="nav-item active">
         <a class="nav-link" href="index.php"> Home</a>
     </li>
     <li class="nav-item active">
