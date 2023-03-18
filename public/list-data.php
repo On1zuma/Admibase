@@ -2,15 +2,19 @@
 
 include('./components/navbar.php');
 
-if (empty($_SESSION['id'])) {
-    header('Location: login.php');
-}
+$status = new RightController();
+$status->isLoggedIn();
+
+$data = new DataController();
+$tableUrl = $data->checkIfUserCanAccessTable();
+
+$tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
 
 ?>
 
 <div class="mx-auto" style="width: 70vw; margin-top: 2rem;">
   <div class="filter" style="margin-bottom: 1rem; display:flex; align-items:center; flex-direction:row; justify-content:space-between;">
-    <span class="label label-default" style="font-weight: 900;">Our base TITLE</span>
+    <span class="label label-default" style="font-weight: 900; text-transform: uppercase;"><?php echo $tableUrlWithSpaces;  ?></span>
     <div style="display:flex; align-items:center; flex-direction:row; justify-content:space-between; gap:1rem">
       <input type="text" class="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1">
       <a href="form.php" type="button" class="btn btn-primary text-white"><span class="glyphicon glyphicon-remove"></span> Create</a>

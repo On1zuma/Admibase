@@ -1,24 +1,12 @@
 <?php
 include('./components/navbar.php');
 
-if (empty($_SESSION['id'])) {
-    header('Location: login.php');
-}
+$status = new RightController();
+$status->isLoggedIn();
 
-$table_name = $_SESSION['id']['table'];
-$bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
+$data = new DataController();
+$tables = $data->listOurTables();
 
-if ($table_name != "*") {
-    $tables = explode(", ", $table_name);
-} else {
-    $getTables = $bdd->query('SHOW TABLES');
-    $tables = array();
-
-    while ($row = $getTables->fetch(PDO::FETCH_NUM)) {
-        $tableName = $row[0];
-        $tables[] = $tableName;
-    }
-}
 ?>
 
 <div class="mx-auto" style="width: 70vw; margin-top: 2rem;">
