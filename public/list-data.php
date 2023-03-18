@@ -15,6 +15,8 @@ $stmt = $bdd->prepare("SHOW TABLES");
 $stmt->execute();
 $tablesBd = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
+$tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
+
 // Check if the table exists in the database
 if (!in_array($tableUrl, $tablesBd)) {
     header('Location: 404.php');
@@ -30,7 +32,7 @@ if ($table_name != "*" && !in_array($tableUrl, explode(", ", $table_name))) {
 
 <div class="mx-auto" style="width: 70vw; margin-top: 2rem;">
   <div class="filter" style="margin-bottom: 1rem; display:flex; align-items:center; flex-direction:row; justify-content:space-between;">
-    <span class="label label-default" style="font-weight: 900;">Our base TITLE</span>
+    <span class="label label-default" style="font-weight: 900; text-transform: uppercase;"><?php echo $tableUrlWithSpaces;  ?></span>
     <div style="display:flex; align-items:center; flex-direction:row; justify-content:space-between; gap:1rem">
       <input type="text" class="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1">
       <a href="form.php" type="button" class="btn btn-primary text-white"><span class="glyphicon glyphicon-remove"></span> Create</a>
