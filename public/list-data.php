@@ -19,7 +19,7 @@ $tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
     <span class="label label-default" style="font-weight: 900; text-transform: uppercase;"><?php echo $tableUrlWithSpaces;  ?></span>
     <div style="display:flex; align-items:center; flex-direction:row; justify-content:space-between; gap:1rem">
       <input type="text" class="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1">
-      <a href="form.php" type="button" class="btn btn-primary text-white"><span class="glyphicon glyphicon-remove"></span> Create</a>
+      <a href="form.php?table=<?php echo  $tableUrl ?>" type="button" class="btn btn-primary text-white"><span class="glyphicon glyphicon-remove"></span> Create</a>
       <a type="button" class="btn btn-danger text-white"><span class="glyphicon glyphicon-remove"></span> Delete</a>
     </div>
   </div>
@@ -44,7 +44,7 @@ foreach ($rows as $index => $row) {
     foreach ($columns as $column) {
         echo "<td>" . $row[$column] . "</td>";
     }
-    echo "<td><a href='form.php'>Edit</a></td>";
+    echo "<td><a href='form.php?table=".$tableUrl."?id=".($index + 1)."'>Edit</a></td>";
     echo "</tr>";
 }
 ?>
