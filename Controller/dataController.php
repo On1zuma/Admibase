@@ -8,8 +8,6 @@ class DataController
         $this->bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
     }
 
-
-
     public function listOurTables()
     {
         $table_name = $_SESSION['id']['table'];
@@ -140,5 +138,20 @@ class DataController
         } catch (PDOException $e) {
             echo "Something went wrong: " . $e->getMessage();
         }
+    }
+
+    public function deleteRows(string $table, array $ids)
+    {
+        $placeholders = implode(',', array_fill(0, count($ids), '?'));
+
+        $sql = "DELETE FROM `$table` WHERE id IN ($placeholders)";
+        $stmt = $this->bdd->prepare($sql);
+
+        if (!$stmt) {
+            return false;
+        }
+
+        $stmt->execute($ids);
+        return true;
     }
 }
