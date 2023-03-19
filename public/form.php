@@ -32,11 +32,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php foreach ($rows[0] as $label => $value) { ?>
         <div class="form-group">
             <label for="<?php echo $label; ?>"><?php echo $label; ?></label>
-            <input type="text" class="form-control" id="<?php echo $label; ?>" aria-describedby="<?php echo $label; ?>" name="<?php echo $label; ?>" value="<?php echo $value; ?>">        </div>
+            <?php if (strpos($label, 'id') !== false) { ?>
+            <input type="number" class="form-control" id="<?php echo $label; ?>" aria-describedby="<?php echo $label; ?>" name="<?php echo $label; ?>" value="<?php echo $value; ?>">
+            <?php } elseif (strpos($label, 'date') !== false) { ?>
+            <input type="date" class="form-control" id="<?php echo $label; ?>" aria-describedby="<?php echo $label; ?>" name="<?php echo $label; ?>" value="<?php echo $value; ?>">
+            <?php } elseif (strpos($label, 'time') !== false) { ?>
+            <input type="time" class="form-control" id="<?php echo $label; ?>" aria-describedby="<?php echo $label; ?>" name="<?php echo $label; ?>" value="<?php echo $value; ?>">
+            <?php } else { ?>
+            <input type="text" class="form-control" id="<?php echo $label; ?>" aria-describedby="<?php echo $label; ?>" name="<?php echo $label; ?>" value="<?php echo $value; ?>">
+            <?php } ?>
+        </div>
         <?php } ?>
         <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+    </form>
 </div>
+
+
 
 
 <?php include('./components/footer.php'); ?>
