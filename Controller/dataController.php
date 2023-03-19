@@ -85,4 +85,64 @@ class DataController
         }
         return $rows;
     }
+
+    public function insertRow(string $table, array $data)
+    {
+        try {
+            $bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
+
+            // Get the maximum ID value from the table
+            $sql = "SELECT MAX(id) FROM $table";
+            $stmt = $bdd->prepare($sql);
+            $stmt->execute();
+            $maxId = $stmt->fetchColumn();
+
+            // Increment the maximum ID value to get the new ID value for the new row
+            $newId = $maxId + 1;
+
+            // Add the new ID value to the data array
+            $data['id'] = $newId;
+
+            // Build the SQL query
+            $columns = implode(', ', array_keys($data));
+            $placeholders = implode(', ', array_fill(0, count($data), '?'));
+
+            $sql = "INSERT INTO $table ($columns) VALUES ($placeholders)";
+            $stmt = $bdd->prepare($sql);
+            if (!$stmt) {
+                return false;
+            }
+            $values = array_values($data);
+            $success = $stmt->execute($values);
+            if (!$success) {
+                return false;
+            }
+            header('Location: list-data.php?table='.$table);
+        } catch (PDOException $e) {
+            echo "Something went wrong: " . $e->getMessage();
+        }
+    }
+
+    public function updateRow(string $table, int $id, array $data)
+    {
+        try {
+            $data['id'] = $id; // Set the id in the array
+            $bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
+            $set = implode(', ', array_map(function ($key) {
+                return "$key = ?";
+            }, array_keys($data)));
+            $sql = "UPDATE `$table` SET $set WHERE id = ?";
+            $stmt = $bdd->prepare($sql);
+
+            if (!$stmt) {
+                return false;
+            }
+
+            $values = array_merge(array_values($data), [$id]);
+            $stmt->execute($values);
+            header('Location: list-data.php?table='.$table);
+        } catch (PDOException $e) {
+            echo "Something went wrong: " . $e->getMessage();
+        }
+    }
 }

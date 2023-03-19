@@ -43,7 +43,7 @@ $tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
           foreach ($columns as $column) {
               echo "<td>" . $row[$column] . "</td>";
           }
-          echo "<td><a href='form.php?table=".$tableUrl."&id=".($index + 1)."'>Edit</a></td>";
+          echo "<td><a href='form.php?table=".$tableUrl."&id=".$row['id']."'>Edit</a></td>";
           echo "</tr>";
       }
 ?>

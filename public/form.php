@@ -14,17 +14,27 @@ if (isset($_GET['id'])) {
     $columns = $data->listOfTableName($tableUrl);
     $rows = [array_fill_keys($columns, '')];
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $formData = $_POST;
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $data->updateRow($tableUrl, $id, $formData);
+    } else {
+        $data->insertRow($tableUrl, $formData);
+    }
+}
+
 ?>
 
 <div class="mx-auto" style="width: 70vw; margin-top: 2rem;">
-  <form>
-    <?php foreach ($rows[0] as $label => $value) { ?>
-    <div class="form-group">
-        <label for="<?php echo $label; ?>"><?php echo $label; ?></label>
-        <input type="text" class="form-control" id="<?php echo $label; ?>" aria-describedby="<?php echo $label; ?>" value="<?php echo $value; ?>">
-    </div>
-    <?php } ?>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <form method="POST">
+        <?php foreach ($rows[0] as $label => $value) { ?>
+        <div class="form-group">
+            <label for="<?php echo $label; ?>"><?php echo $label; ?></label>
+            <input type="text" class="form-control" id="<?php echo $label; ?>" aria-describedby="<?php echo $label; ?>" name="<?php echo $label; ?>" value="<?php echo $value; ?>">        </div>
+        <?php } ?>
+        <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
 
