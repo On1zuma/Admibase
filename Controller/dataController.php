@@ -2,19 +2,22 @@
 
 class DataController
 {
+    private $bdd;
     public function __construct()
     {
+        $this->bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
     }
+
+
 
     public function listOurTables()
     {
         $table_name = $_SESSION['id']['table'];
-        $bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
 
         if ($table_name != "*") {
             $tables = explode(", ", $table_name);
         } else {
-            $stmt = $bdd->prepare("SHOW TABLES");
+            $stmt = $this->bdd->prepare("SHOW TABLES");
             $stmt->execute();
             $tables = $stmt->fetchAll(PDO::FETCH_COLUMN);
         }
@@ -23,11 +26,9 @@ class DataController
 
     public function checkIfUserCanAccessTable()
     {
-        $bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
-
         $table_name = $_SESSION['id']['table']; // users tables
         $tableUrl = $_GET['table']; // table set in the url
-        $stmt = $bdd->prepare("SHOW TABLES");
+        $stmt = $this->bdd->prepare("SHOW TABLES");
         $stmt->execute();
         $tablesBd = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
@@ -47,10 +48,9 @@ class DataController
 
     public function listOfTableName($tableUrl)
     {
-        $bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
         // Get the column names for a table
         $tableName = $tableUrl;
-        $stmt = $bdd->query("DESCRIBE $tableName");
+        $stmt = $this->bdd->query("DESCRIBE $tableName");
         $columns = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $columns[] = $row['Field'];
@@ -61,9 +61,8 @@ class DataController
 
     public function listOfRowName($tableUrl)
     {
-        $bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
         $tableName = $tableUrl;
-        $stmt = $bdd->query("SELECT * FROM $tableName");
+        $stmt = $this->bdd->query("SELECT * FROM $tableName");
         $rows = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $rows[] = $row;
@@ -73,9 +72,8 @@ class DataController
 
     public function listOfRowNameWithId($tableUrl, $id)
     {
-        $bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
         $tableName = $tableUrl;
-        $stmt = $bdd->prepare("SELECT * FROM $tableName WHERE id = ?");
+        $stmt = $this->bdd->prepare("SELECT * FROM $tableName WHERE id = ?");
         $stmt->execute(array($id));
 
         $rows = array();
@@ -89,11 +87,9 @@ class DataController
     public function insertRow(string $table, array $data)
     {
         try {
-            $bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
-
             // Get the maximum ID value from the table
             $sql = "SELECT MAX(id) FROM $table";
-            $stmt = $bdd->prepare($sql);
+            $stmt = $this->bdd->prepare($sql);
             $stmt->execute();
             $maxId = $stmt->fetchColumn();
 
@@ -108,7 +104,7 @@ class DataController
             $placeholders = implode(', ', array_fill(0, count($data), '?'));
 
             $sql = "INSERT INTO $table ($columns) VALUES ($placeholders)";
-            $stmt = $bdd->prepare($sql);
+            $stmt = $this->bdd->prepare($sql);
             if (!$stmt) {
                 return false;
             }
@@ -127,12 +123,12 @@ class DataController
     {
         try {
             $data['id'] = $id; // Set the id in the array
-            $bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
+
             $set = implode(', ', array_map(function ($key) {
                 return "$key = ?";
             }, array_keys($data)));
             $sql = "UPDATE `$table` SET $set WHERE id = ?";
-            $stmt = $bdd->prepare($sql);
+            $stmt = $this->bdd->prepare($sql);
 
             if (!$stmt) {
                 return false;
