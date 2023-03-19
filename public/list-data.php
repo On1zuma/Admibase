@@ -36,17 +36,16 @@ $tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
 
     </thead>
     <tbody>
-  <?php
-    $rows = $data->listOfRowName($tableUrl);
-foreach ($rows as $index => $row) {
-    echo "<tr>";
-    echo "<th scope='row'><input type='checkbox' value='id:". ($index + 1) ."' ></th>";
-    foreach ($columns as $column) {
-        echo "<td>" . $row[$column] . "</td>";
-    }
-    echo "<td><a href='form.php?table=".$tableUrl."?id=".($index + 1)."'>Edit</a></td>";
-    echo "</tr>";
-}
+    <?php
+      foreach ($rows as $index => $row) {
+          echo "<tr>";
+          echo "<th scope='row'><input type='checkbox' value='id:". ($index + 1) ."' ></th>";
+          foreach ($columns as $column) {
+              echo "<td>" . $row[$column] . "</td>";
+          }
+          echo "<td><a href='form.php?table=".$tableUrl."&id=".($index + 1)."'>Edit</a></td>";
+          echo "</tr>";
+      }
 ?>
 </tbody>
 

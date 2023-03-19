@@ -31,8 +31,6 @@ class DataController
         $stmt->execute();
         $tablesBd = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-        $tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
-
         // Check if the table exists in the database
         if (!in_array($tableUrl, $tablesBd)) {
             header('Location: 404.php');
@@ -58,7 +56,6 @@ class DataController
             $columns[] = $row['Field'];
         }
 
-        // Print the column names
         return $columns;
     }
 
@@ -68,6 +65,21 @@ class DataController
         $tableName = $tableUrl;
         $stmt = $bdd->query("SELECT * FROM $tableName");
         $rows = array();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
+    public function listOfRowNameWithId($tableUrl, $id)
+    {
+        $bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
+        $tableName = $tableUrl;
+        $stmt = $bdd->prepare("SELECT * FROM $tableName WHERE id = ?");
+        $stmt->execute(array($id));
+
+        $rows = array();
+
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $rows[] = $row;
         }
