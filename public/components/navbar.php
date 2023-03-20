@@ -8,6 +8,8 @@ if (session_status() === PHP_SESSION_NONE) {
 
 if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
     print_r($_SESSION['id']);
+    // var_dump($_SESSION['username']);
+    // var_dump($_SESSION['password']);
 }
 ?>
 
