@@ -68,6 +68,17 @@ class DataController
         return $rows;
     }
 
+    public function listOfRowNameWithFilter($tableUrl, $column, $order)
+    {
+        $tableName = $tableUrl;
+        $stmt = $this->bdd->query("SELECT * FROM $tableName ORDER BY $column $order");
+        $rows = array();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
     public function listOfRowNameWithId($tableUrl, $id)
     {
         $tableName = $tableUrl;

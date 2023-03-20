@@ -9,6 +9,16 @@ $data = new DataController();
 $tableUrl = $data->checkIfUserCanAccessTable();
 $columns = $data->listOfTableName($tableUrl);
 $rows = $data->listOfRowName($tableUrl);
+$order = 0;
+if(isset($_GET['order'])){
+  if($_GET['order'] == "DESC" || $_GET['order'] == "ASC"){
+    $order = $_GET['order'];
+    $columnFilter = $_GET['column'];
+    if(in_array($columnFilter, $columns)) {
+      $rows = $data->listOfRowNameWithFilter($tableUrl, $columnFilter, $order);
+    }
+  }
+}
 
 $tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
 
@@ -28,7 +38,12 @@ $tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
           <tr>
             <th scope="col">#</th>
             <?php foreach ($columns as $column) {
-                echo '<th scope="col"><a href="">'.$column.'</a></th>';
+                if($order == "DESC"){
+                  echo '<th scope="col"><a href="list-data.php?table='.$tableUrl.'&column='.$column.'&order=ASC">'.$column.'</a></th>';
+                }
+                else
+                  echo '<th scope="col"><a href="list-data.php?table='.$tableUrl.'&column='.$column.'&order=DESC">'.$column.'</a></th>';
+
             } ?>
             <th><a href=""></a></th>
           </tr>
