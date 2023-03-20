@@ -19,16 +19,23 @@ if(isset($_GET['order'])){
     }
   }
 }
+if(isset($_GET["search"])){
+  $rows = $data->listOfRowNameWithSearch($tableUrl, $_GET["search"]);
+}
 
 $tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
 
 ?>
   <div class="mx-auto" style="width: 100vw; margin-top: 2rem;">
+  <form method="POST" action="search.php?table=<?php echo $tableUrl ?>">
+  <div style=" display:flex; margin-bottom:2rem; justify-content:center;">
+  <input style="width:60%;" name="search" type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon1">
+  </form>  
+  </div>
     <form method="POST" action="delete.php?table=<?php echo $tableUrl ?>">
       <div class="filter" style="margin-bottom: 1rem; display:flex; align-items:center; flex-direction:row; justify-content:space-around;">
         <span class="label label-default" style="font-weight: 900; text-transform: uppercase;"><?php echo $tableUrlWithSpaces;  ?></span>
         <div style="display:flex; align-items:center; flex-direction:row; justify-content:space-between; gap:1rem">
-          <input type="text" class="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1">
           <a href="form.php?table=<?php echo  $tableUrl ?>" type="button" class="btn btn-primary text-white"><span class="glyphicon glyphicon-remove"></span> Create</a>
           <button id="delete-btn" type="submit" class="btn btn-danger text-white"><span class="glyphicon glyphicon-remove"></span> Delete</button></div>
       </div>
