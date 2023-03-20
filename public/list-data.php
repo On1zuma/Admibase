@@ -2,67 +2,63 @@
 
 include('./components/navbar.php');
 
-if (empty($_SESSION['id'])) {
-    header('Location: /login.php');
-}
+$status = new RightController();
+$status->isLoggedIn();
+
+$data = new DataController();
+$tableUrl = $data->checkIfUserCanAccessTable();
+$columns = $data->listOfTableName($tableUrl);
+$rows = $data->listOfRowName($tableUrl);
+
+$tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
 
 ?>
+  <div class="mx-auto" style="width: 100vw; margin-top: 2rem;">
+    <form method="POST" action="delete.php?table=<?php echo $tableUrl ?>">
+      <div class="filter" style="margin-bottom: 1rem; display:flex; align-items:center; flex-direction:row; justify-content:space-around;">
+        <span class="label label-default" style="font-weight: 900; text-transform: uppercase;"><?php echo $tableUrlWithSpaces;  ?></span>
+        <div style="display:flex; align-items:center; flex-direction:row; justify-content:space-between; gap:1rem">
+          <input type="text" class="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1">
+          <a href="form.php?table=<?php echo  $tableUrl ?>" type="button" class="btn btn-primary text-white"><span class="glyphicon glyphicon-remove"></span> Create</a>
+          <button id="delete-btn" type="submit" class="btn btn-danger text-white"><span class="glyphicon glyphicon-remove"></span> Delete</button></div>
+      </div>
 
-<div class="mx-auto" style="width: 70vw; margin-top: 2rem;">
-  <div class="filter" style="margin-bottom: 1rem; display:flex; align-items:center; flex-direction:row; justify-content:space-between;">
-    <span class="label label-default" style="font-weight: 900;">Our base TITLE</span>
-    <div style="display:flex; align-items:center; flex-direction:row; justify-content:space-between; gap:1rem">
-      <input type="text" class="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1">
-      <a href="/form.php" type="button" class="btn btn-primary text-white"><span class="glyphicon glyphicon-remove"></span> Create</a>
-      <a type="button" class="btn btn-danger text-white"><span class="glyphicon glyphicon-remove"></span> Delete</a>
-    </div>
-  </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <?php foreach ($columns as $column) {
+                echo '<th scope="col"><a href="">'.$column.'</a></th>';
+            } ?>
+            <th><a href=""></a></th>
+          </tr>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col"><a href="">First</a></th>
-        <th scope="col"><a href="">Handle</a></th>
-        <th scope="col"><a href="">Last (to filter by)</a></th>
-        <th><a href=""></a></th>
-      </tr>
+        </thead>
+        <tbody>
+          <?php
+            foreach ($rows as $index => $row) {
+                echo "<tr>";
+                echo "<td><input type='checkbox' name='ids[]' value='".$row['id']."' ></td>";
+                foreach ($columns as $column) {
+                    echo "<td>" . $row[$column] . "</td>";
+                }
+                echo "<td><a href='form.php?table=".$tableUrl."&id=".$row['id']."'>Edit</a></td>";
+                echo "</tr>";
+            }
+?>
+        </tbody>
+      </table>
+    </form>
 
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row"><input type="checkbox" value="" ></th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td><a href="/form.php">Edit</a></td>
-      </tr>
-      <tr>
-      <th scope="row"><input type="checkbox" value="" ></th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td><a href="/form.php">Edit</a></td>
-      </tr>
-      <tr>
-      <th scope="row"><input type="checkbox" value="" ></th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td><a href="/form.php">Edit</a></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-  </ul>
-</nav>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
 </div>
 
 
@@ -79,6 +75,17 @@ if (empty($_SESSION['id'])) {
   }
     }
 </style>
+
+<script>
+  document.getElementById("delete-btn").addEventListener("click", function(e) {
+    var checkboxes = document.querySelectorAll("input[type=checkbox]:checked");
+    if (checkboxes.length === 0) {
+      e.preventDefault(); // We prevent form from being submitted
+      alert("Please select at least one row to delete.");
+    }
+  });
+</script>
+
 
 <?php include('./components/footer.php'); ?>
 

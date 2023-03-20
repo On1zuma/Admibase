@@ -4,11 +4,19 @@
 
 - cd .\public\
 - php -S localhost:8000
+  Warning, database will not work
 
 ## BRANCH
 
-git pull // to update
-git switch "branch name" // to select the good branch
+- git pull // to update
+- git switch branchName // to select the good branch
+  Warning, please remember that you have to start from the main branch to select one of our branches.
+
+## WAMP - XAMP - MAMP
+
+- Set up your project inside the "www" folder.
+- Launch Wamp, Xampp, or any other web server software you are using.
+- Then use the URL "http://localhost/SIBD/public/index.php" to access the project.
 
 ## PUBLIC CONFIG
 
@@ -34,6 +42,20 @@ ou en allant ici : http://localhost/add_vhost.php
 
 - Pour tester (avec le nom du virtualhost choisi):
 
-  http://adminbase/
+http://adminbase/
 
 La page doit s'afficher.
+
+## TO CREATE A NEW USER
+
+To create a new user in MySQL, first access your MySQL database, then execute the following command:
+
+- CREATE USER 'admin_db_test'@'localhost' IDENTIFIED BY 'adminsecurite';
+
+This command creates a new user 'admin_db_test' with the password 'adminsecurite' and sets the user's access privileges to the local host.
+
+Next, you can grant this user access to specific database(s) or table(s) within your MySQL database using the GRANT statement. For example, to grant 'admin_db_test' full privileges to the 'gamedb' database, you can execute the following command:
+
+- GRANT ALL PRIVILEGES ON gamedb.\* TO 'admin_db_test'@'localhost';
+
+This will give the user 'admin_db_test' full access to all tables and functions within the 'gamedb' database. Make sure to replace 'gamedb' with the name of the database you want to grant access to.
