@@ -22,32 +22,34 @@ $tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
           <a href="form.php?table=<?php echo  $tableUrl ?>" type="button" class="btn btn-primary text-white"><span class="glyphicon glyphicon-remove"></span> Create</a>
           <button id="delete-btn" type="submit" class="btn btn-danger text-white"><span class="glyphicon glyphicon-remove"></span> Delete</button></div>
       </div>
+      <div  style="overflow: auto;" >
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <?php foreach ($columns as $column) {
+                  echo '<th scope="col"><a href="">'.$column.'</a></th>';
+              } ?>
+              <th><a href=""></a></th>
+            </tr>
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <?php foreach ($columns as $column) {
-                echo '<th scope="col"><a href="">'.$column.'</a></th>';
-            } ?>
-            <th><a href=""></a></th>
-          </tr>
-
-        </thead>
-        <tbody>
-          <?php
-            foreach ($rows as $index => $row) {
-                echo "<tr>";
-                echo "<td><input type='checkbox' name='ids[]' value='".$row['id']."' ></td>";
-                foreach ($columns as $column) {
-                    echo "<td>" . $row[$column] . "</td>";
-                }
-                echo "<td><a href='form.php?table=".$tableUrl."&id=".$row['id']."'>Edit</a></td>";
-                echo "</tr>";
-            }
+          </thead>
+          <tbody>
+            <?php
+              foreach ($rows as $index => $row) {
+                  echo "<tr>";
+                  echo "<td><input type='checkbox' name='ids[]' value='".$row['id']."' ></td>";
+                  foreach ($columns as $column) {
+                      echo "<td>" . $row[$column] . "</td>";
+                  }
+                  echo "<td><a href='form.php?table=".$tableUrl."&id=".$row['id']."'>Edit</a></td>";
+                  echo "</tr>";
+              }
 ?>
-        </tbody>
-      </table>
+          </tbody>
+        </table>  
+      </div>
+
     </form>
 
     <nav aria-label="Page navigation example">
