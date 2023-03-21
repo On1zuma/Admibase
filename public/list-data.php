@@ -29,7 +29,10 @@ $tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
   <div class="mx-auto" style="width: 100vw; margin-top: 2rem;">
   <form method="POST" action="search.php?table=<?php echo $tableUrl ?>">
   <div style=" display:flex; margin-bottom:2rem; justify-content:center;">
-  <input style="width:60%;" name="search" type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon1">
+  <input style="width:60%;" name="search" type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon1" 
+  value="<?php if (isset($_GET["search"])) {
+      echo $_GET["search"];
+  }?>">
   <?php if (isset($_GET["search"])) { ?>
   <a href="list-data.php?table=<?php echo $tableUrl ?>" style="margin-left:.5rem" class="btn btn-primary text-white"> X </a>
   <?php }?>
