@@ -64,7 +64,7 @@ This will give the user 'admin_db_test' full access to all tables and functions 
 1) Dans phpmyadmin créer une nouvelle base de donnée nommée 'gamedb'.
 2) Dans le menu en haut cliquer su 'Importer'.
 3) Dans 'Choisir un fichier' mettre le fichier gamedb_structure.sql (disponible sur github dans le dossier bdd) puis cliquer sur 'Importer' en bas de la page (c'est long donc il faut attendre).
-4) La structure est donc créer ! Maintenant il faut importer les données des tables.
+4) La structure est donc créer ! Maintenant il faut importer les données des tables (les données se trouvent dans bdd/Donnée_v2.zip donc il faut d'abord le dézipper).
 5) Cliquer sur importer et dans 'Choisir un fichier' mettre le fichier sql de la première table puis cliquer sur 'Importer' en bas de la page (c'est long donc il faut attendre).
 6) Répéter l'action pour les autres tables.
 
