@@ -46,6 +46,8 @@ DROP TABLE IF EXISTS `calendrier_joueur`;
 CREATE TABLE IF NOT EXISTS `calendrier_joueur` (
   `tache_id` int DEFAULT NULL,
   `joueur_id` int DEFAULT NULL,
+  `id` int NOT NULL,
+  PRIMARY KEY (`id`),
   KEY `joueur_id` (`joueur_id`),
   KEY `tache_id` (`tache_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
