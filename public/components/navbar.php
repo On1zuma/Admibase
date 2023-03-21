@@ -6,11 +6,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
-    print_r($_SESSION['id']);
-    // var_dump($_SESSION['username']);
-    // var_dump($_SESSION['password']);
-}
 ?>
 
 <!DOCTYPE html>
