@@ -9,42 +9,64 @@ $data = new DataController();
 $tableUrl = $data->checkIfUserCanAccessTable();
 $columns = $data->listOfTableName($tableUrl);
 $rows = $data->listOfRowName($tableUrl);
+$order = 0;
+if(isset($_GET['order'])){
+  if($_GET['order'] == "DESC" || $_GET['order'] == "ASC"){
+    $order = $_GET['order'];
+    $columnFilter = $_GET['column'];
+    if(in_array($columnFilter, $columns)) {
+      $rows = $data->listOfRowNameWithFilter($tableUrl, $columnFilter, $order);
+    }
+  }
+}
+if(isset($_GET["search"])){
+  $rows = $data->listOfRowNameWithSearch($tableUrl, $_GET["search"]);
+}
 
 $tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
 
 ?>
   <div class="mx-auto" style="width: 100vw; margin-top: 2rem;">
+  <form method="POST" action="search.php?table=<?php echo $tableUrl ?>">
+  <div style=" display:flex; margin-bottom:2rem; justify-content:center;">
+  <input style="width:60%;" name="search" type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon1">
+  </form>  
+  </div>
     <form method="POST" action="delete.php?table=<?php echo $tableUrl ?>">
       <div class="filter" style="margin-bottom: 1rem; display:flex; align-items:center; flex-direction:row; justify-content:space-around;">
         <span class="label label-default" style="font-weight: 900; text-transform: uppercase;"><?php echo $tableUrlWithSpaces;  ?></span>
         <div style="display:flex; align-items:center; flex-direction:row; justify-content:space-between; gap:1rem">
-          <input type="text" class="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1">
           <a href="form.php?table=<?php echo  $tableUrl ?>" type="button" class="btn btn-primary text-white"><span class="glyphicon glyphicon-remove"></span> Create</a>
           <button id="delete-btn" type="submit" class="btn btn-danger text-white"><span class="glyphicon glyphicon-remove"></span> Delete</button></div>
       </div>
       <div  style="overflow: auto;" >
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <?php foreach ($columns as $column) {
-                  echo '<th scope="col"><a href="">'.$column.'</a></th>';
-              } ?>
-              <th><a href=""></a></th>
-            </tr>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <?php foreach ($columns as $column) {
+                if($order == "DESC"){
+                  echo '<th scope="col"><a href="list-data.php?table='.$tableUrl.'&column='.$column.'&order=ASC">'.$column.'</a></th>';
+                }
+                else
+                  echo '<th scope="col"><a href="list-data.php?table='.$tableUrl.'&column='.$column.'&order=DESC">'.$column.'</a></th>';
 
-          </thead>
-          <tbody>
-            <?php
-              foreach ($rows as $index => $row) {
-                  echo "<tr>";
-                  echo "<td><input type='checkbox' name='ids[]' value='".$row['id']."' ></td>";
-                  foreach ($columns as $column) {
-                      echo "<td>" . $row[$column] . "</td>";
-                  }
-                  echo "<td><a href='form.php?table=".$tableUrl."&id=".$row['id']."'>Edit</a></td>";
-                  echo "</tr>";
-              }
+            } ?>
+            <th><a href=""></a></th>
+          </tr>
+
+        </thead>
+        <tbody>
+          <?php
+            foreach ($rows as $index => $row) {
+                echo "<tr>";
+                echo "<td><input type='checkbox' name='ids[]' value='".$row['id']."' ></td>";
+                foreach ($columns as $column) {
+                    echo "<td>" . $row[$column] . "</td>";
+                }
+                echo "<td><a href='form.php?table=".$tableUrl."&id=".$row['id']."'>Edit</a></td>";
+                echo "</tr>";
+            }
 ?>
           </tbody>
         </table>  

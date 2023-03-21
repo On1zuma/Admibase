@@ -68,6 +68,36 @@ class DataController
         return $rows;
     }
 
+    public function listOfRowNameWithFilter($tableUrl, $column, $order)
+    {
+        $tableName = $tableUrl;
+        $stmt = $this->bdd->query("SELECT * FROM $tableName ORDER BY $column $order");
+        $rows = array();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+    public function listOfRowNameWithSearch($tableUrl, $search)
+
+    {
+        $tableName = $tableUrl;
+        $columns = $this->listOfTableName($tableUrl);
+        #$stmt = $this->bdd->prepare("SELECT * FROM $tableName WHERE CONTACT_WS(columns) LIKE '%?%'");
+        $sql = "SELECT * FROM $tableName WHERE ";
+        $conditions = array();
+        foreach ($columns as $colonne) {
+            $conditions[] = $colonne . " LIKE '%" . $search . "%'";
+        }
+        $sql .= implode(' OR ', $conditions);
+        $stmt = $this->bdd->query($sql);
+        $rows = array();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
     public function listOfRowNameWithId($tableUrl, $id)
     {
         $tableName = $tableUrl;
