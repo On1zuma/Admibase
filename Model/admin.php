@@ -48,6 +48,8 @@ class Admin
                 // Se connecter avec l'utilisateur
                 $this->user = $username;
                 $this->password = $userpassword;
+                $_SESSION['username'] = $this->user;
+                $_SESSION['password'] = $this->password;
                 @mysqli_connect($this->host, $this->user, $this->password, $this->database);
                 if (!mysqli_connect_errno()) {
                     $table = $this->rightUser($username);

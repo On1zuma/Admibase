@@ -5,7 +5,7 @@ class DataController
     private $bdd;
     public function __construct()
     {
-        $this->bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
+        $this->bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', $_SESSION['username'], $_SESSION['password']);
     }
 
     public function listOurTables()
@@ -68,6 +68,36 @@ class DataController
         return $rows;
     }
 
+    public function listOfRowNameWithFilter($tableUrl, $column, $order)
+    {
+        $tableName = $tableUrl;
+        $stmt = $this->bdd->query("SELECT * FROM $tableName ORDER BY $column $order");
+        $rows = array();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+    public function listOfRowNameWithSearch($tableUrl, $search)
+
+    {
+        $tableName = $tableUrl;
+        $columns = $this->listOfTableName($tableUrl);
+        #$stmt = $this->bdd->prepare("SELECT * FROM $tableName WHERE CONTACT_WS(columns) LIKE '%?%'");
+        $sql = "SELECT * FROM $tableName WHERE ";
+        $conditions = array();
+        foreach ($columns as $colonne) {
+            $conditions[] = $colonne . " LIKE '%" . $search . "%'";
+        }
+        $sql .= implode(' OR ', $conditions);
+        $stmt = $this->bdd->query($sql);
+        $rows = array();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
     public function listOfRowNameWithId($tableUrl, $id)
     {
         $tableName = $tableUrl;
@@ -84,6 +114,7 @@ class DataController
 
     public function insertRow(string $table, array $data)
     {
+        $this->checkIfUserCanAccessTable();
         try {
             // Get the maximum ID value from the table
             $sql = "SELECT MAX(id) FROM $table";
@@ -119,6 +150,7 @@ class DataController
 
     public function updateRow(string $table, int $id, array $data)
     {
+        $this->checkIfUserCanAccessTable();
         try {
             $data['id'] = $id; // Set the id in the array
 
@@ -142,6 +174,7 @@ class DataController
 
     public function deleteRows(string $table, array $ids)
     {
+        $this->checkIfUserCanAccessTable();
         $placeholders = implode(',', array_fill(0, count($ids), '?'));
 
         $sql = "DELETE FROM `$table` WHERE id IN ($placeholders)";
