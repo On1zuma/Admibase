@@ -41,6 +41,7 @@ class DataController
             header('Location: list-table.php');
             exit; // stop the script
         }
+
         return $tableUrl;
     }
 
@@ -59,8 +60,9 @@ class DataController
 
     public function listOfRowName($tableUrl)
     {
+        $offset = $this->pagination();
         $tableName = $tableUrl;
-        $stmt = $this->bdd->query("SELECT * FROM $tableName");
+        $stmt = $this->bdd->query("SELECT * FROM $tableName LIMIT 10 OFFSET $offset");
         $rows = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $rows[] = $row;
@@ -70,8 +72,9 @@ class DataController
 
     public function listOfRowNameWithFilter($tableUrl, $column, $order)
     {
+        $offset = $this->pagination();
         $tableName = $tableUrl;
-        $stmt = $this->bdd->query("SELECT * FROM $tableName ORDER BY $column $order");
+        $stmt = $this->bdd->query("SELECT * FROM $tableName ORDER BY $column $order LIMIT 10 OFFSET $offset");
         $rows = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $rows[] = $row;
@@ -79,8 +82,9 @@ class DataController
         return $rows;
     }
     public function listOfRowNameWithSearch($tableUrl, $search)
-
     {
+        $offset = $this->pagination();
+
         $tableName = $tableUrl;
         $columns = $this->listOfTableName($tableUrl);
         #$stmt = $this->bdd->prepare("SELECT * FROM $tableName WHERE CONTACT_WS(columns) LIKE '%?%'");
@@ -90,6 +94,7 @@ class DataController
             $conditions[] = $colonne . " LIKE '%" . $search . "%'";
         }
         $sql .= implode(' OR ', $conditions);
+        $sql = $sql." LIMIT 10 OFFSET $offset";
         $stmt = $this->bdd->query($sql);
         $rows = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -186,5 +191,25 @@ class DataController
 
         $stmt->execute($ids);
         return true;
+    }
+
+    public function pagination(){
+        $page = 1;
+        $offset = 0;
+        if(isset($_GET['page'])){
+            $page = $_GET['page'];
+        }
+        else{
+            $page = 1;
+        }
+
+        if($page == 1){
+            $offset = 0;
+        }
+        else{
+            $offset = ($page - 1) * 10;
+        }
+
+        return $offset;
     }
 }
