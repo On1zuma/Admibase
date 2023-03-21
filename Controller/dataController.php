@@ -87,7 +87,7 @@ class DataController
 
         $tableName = $tableUrl;
         $columns = $this->listOfTableName($tableUrl);
-        #$stmt = $this->bdd->prepare("SELECT * FROM $tableName WHERE CONTACT_WS(columns) LIKE '%?%'");
+       
         $sql = "SELECT * FROM $tableName WHERE ";
         $conditions = array();
         foreach ($columns as $colonne) {

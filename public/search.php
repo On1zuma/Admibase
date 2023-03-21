@@ -9,7 +9,5 @@ $tableUrl = $data->checkIfUserCanAccessTable();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $search = $_POST['search'];
 
-    #$data->deleteRows($tableUrl, $ids);
-
     header('Location: list-data.php?table='.$tableUrl.'&search='.$search);
 }

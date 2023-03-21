@@ -6,11 +6,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
-    print_r($_SESSION['id']);
-    // var_dump($_SESSION['username']);
-    // var_dump($_SESSION['password']);
-}
 ?>
 
 <!DOCTYPE html>
@@ -28,10 +23,7 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
   <a class="navbar-brand" href="index.php">AdmiBase</a>
 
   <ul class="navbar-nav mr-auto" style="display:flex; flex-direction:row; gap:1rem;">
-
-    <li class="nav-item active">
-        <a class="nav-link" href="#"> PhpMyAdmin</a>
-    </li>
+   
     <?php if (!isset($_SESSION['id'])): // check if user is not login so we show that link?>
     <li class="nav-item active">
         <a class="nav-link" href="index.php"> Home</a>
@@ -42,6 +34,12 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
     <?php endif; ?>
 
     <?php if (isset($_SESSION['id']) && !empty($_SESSION['id'])): // check if user is logged in so we only show that links?>
+        <?php
+            if($_SESSION['id']['table'] == "*"){ ?>         
+        <li class="nav-item active">
+         <a class="nav-link" href="#"> PhpMyAdmin</a>
+        </li>
+    <?php } ?>
     <li class="nav-item active">
         <a class="nav-link" href="list-table.php">Table list</a>
     </li>
