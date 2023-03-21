@@ -10,17 +10,17 @@ $tableUrl = $data->checkIfUserCanAccessTable();
 $columns = $data->listOfTableName($tableUrl);
 $rows = $data->listOfRowName($tableUrl);
 $order = 0;
-if(isset($_GET['order'])){
-  if($_GET['order'] == "DESC" || $_GET['order'] == "ASC"){
-    $order = $_GET['order'];
-    $columnFilter = $_GET['column'];
-    if(in_array($columnFilter, $columns)) {
-      $rows = $data->listOfRowNameWithFilter($tableUrl, $columnFilter, $order);
+if (isset($_GET['order'])) {
+    if ($_GET['order'] == "DESC" || $_GET['order'] == "ASC") {
+        $order = $_GET['order'];
+        $columnFilter = $_GET['column'];
+        if (in_array($columnFilter, $columns)) {
+            $rows = $data->listOfRowNameWithFilter($tableUrl, $columnFilter, $order);
+        }
     }
-  }
 }
-if(isset($_GET["search"])){
-  $rows = $data->listOfRowNameWithSearch($tableUrl, $_GET["search"]);
+if (isset($_GET["search"])) {
+    $rows = $data->listOfRowNameWithSearch($tableUrl, $_GET["search"]);
 }
 
 $tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
@@ -30,14 +30,17 @@ $tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
   <form method="POST" action="search.php?table=<?php echo $tableUrl ?>">
   <div style=" display:flex; margin-bottom:2rem; justify-content:center;">
   <input style="width:60%;" name="search" type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon1">
+  <?php if (isset($_GET["search"])) { ?>
+  <a href="list-data.php?table=<?php echo $tableUrl ?>" style="margin-left:.5rem" class="btn btn-primary text-white"> X </a>
+  <?php }?>
   </form>  
   </div>
     <form method="POST" action="delete.php?table=<?php echo $tableUrl ?>">
       <div class="filter" style="margin-bottom: 1rem; display:flex; align-items:center; flex-direction:row; justify-content:space-around;">
         <span class="label label-default" style="font-weight: 900; text-transform: uppercase;"><?php echo $tableUrlWithSpaces;  ?></span>
         <div style="display:flex; align-items:center; flex-direction:row; justify-content:space-between; gap:1rem">
-          <a href="form.php?table=<?php echo  $tableUrl ?>" type="button" class="btn btn-primary text-white"><span class="glyphicon glyphicon-remove"></span> Create</a>
-          <button id="delete-btn" type="submit" class="btn btn-danger text-white"><span class="glyphicon glyphicon-remove"></span> Delete</button></div>
+          <a href="form.php?table=<?php echo  $tableUrl ?>" type="button" class="btn btn-primary text-white"> Create</a>
+          <button id="delete-btn" type="submit" class="btn btn-danger text-white">Delete</button></div>
       </div>
       <div  style="overflow: auto;" >
       <table class="table">
@@ -45,12 +48,11 @@ $tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
           <tr>
             <th scope="col">#</th>
             <?php foreach ($columns as $column) {
-                if($order == "DESC"){
-                  echo '<th scope="col"><a href="list-data.php?table='.$tableUrl.'&column='.$column.'&order=ASC">'.$column.'</a></th>';
+                if ($order == "DESC") {
+                    echo '<th scope="col"><a href="list-data.php?table='.$tableUrl.'&column='.$column.'&order=ASC">'.$column.'</a></th>';
+                } else {
+                    echo '<th scope="col"><a href="list-data.php?table='.$tableUrl.'&column='.$column.'&order=DESC">'.$column.'</a></th>';
                 }
-                else
-                  echo '<th scope="col"><a href="list-data.php?table='.$tableUrl.'&column='.$column.'&order=DESC">'.$column.'</a></th>';
-
             } ?>
             <th><a href=""></a></th>
           </tr>

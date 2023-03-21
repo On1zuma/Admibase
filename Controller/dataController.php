@@ -114,6 +114,7 @@ class DataController
 
     public function insertRow(string $table, array $data)
     {
+        $this->checkIfUserCanAccessTable();
         try {
             // Get the maximum ID value from the table
             $sql = "SELECT MAX(id) FROM $table";
@@ -149,6 +150,7 @@ class DataController
 
     public function updateRow(string $table, int $id, array $data)
     {
+        $this->checkIfUserCanAccessTable();
         try {
             $data['id'] = $id; // Set the id in the array
 
@@ -172,6 +174,7 @@ class DataController
 
     public function deleteRows(string $table, array $ids)
     {
+        $this->checkIfUserCanAccessTable();
         $placeholders = implode(',', array_fill(0, count($ids), '?'));
 
         $sql = "DELETE FROM `$table` WHERE id IN ($placeholders)";
