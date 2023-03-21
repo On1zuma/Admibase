@@ -59,3 +59,13 @@ Next, you can grant this user access to specific database(s) or table(s) within 
 - GRANT ALL PRIVILEGES ON gamedb.\* TO 'admin_db_test'@'localhost';
 
 This will give the user 'admin_db_test' full access to all tables and functions within the 'gamedb' database. Make sure to replace 'gamedb' with the name of the database you want to grant access to.
+
+## CREATE AND USE THE DATABASE
+1) In phpMyAdmin, create a new database named 'gamedb'.
+2) In the top menu, click on 'Import'.
+3) In 'Choose a file', select the gamedb_structure.sql file (available on GitHub in the bdd folder), then click on 'Import' at the bottom of the page (this may take some time).
+4) The structure is now created! Next, you need to import the data for the tables (the data can be found in bdd/Donnée_v2.zip, so you need to unzip it first).
+5) Click on 'Import' and in 'Choose a file', select the SQL file for the first table, then click on 'Import' at the bottom of the page (this may take some time).
+6) Repeat the process for the other tables.
+
+
