@@ -41,7 +41,16 @@ class DataController
             header('Location: list-table.php');
             exit; // stop the script
         }
-        return $tableUrl;
+
+        $page = $_GET['page'];
+        if(empty($page)){
+            $page = 0;
+        }
+
+        $retour[0] = $tableUrl; //tables
+        $retour[1] = $page; //page
+        
+        return $retour;
     }
 
     public function listOfTableName($tableUrl)
@@ -59,8 +68,10 @@ class DataController
 
     public function listOfRowName($tableUrl)
     {
-        $tableName = $tableUrl;
-        $stmt = $this->bdd->query("SELECT * FROM $tableName");
+        $page = $tableUrl[1];
+        $offset = ($page - 1) * 10;
+        $tableName = $tableUrl[0];
+        $stmt = $this->bdd->query("SELECT * FROM $tableName LIMIT 10 OFFSET $offset");
         $rows = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $rows[] = $row;

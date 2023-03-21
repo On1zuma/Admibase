@@ -7,8 +7,10 @@ $status->isLoggedIn();
 
 $data = new DataController();
 $tableUrl = $data->checkIfUserCanAccessTable();
+$page = $tableUrl;
+$tableUrl = $tableUrl[0];
 $columns = $data->listOfTableName($tableUrl);
-$rows = $data->listOfRowName($tableUrl);
+$rows = $data->listOfRowName($page);
 $order = 0;
 if (isset($_GET['order'])) {
     if ($_GET['order'] == "DESC" || $_GET['order'] == "ASC") {
