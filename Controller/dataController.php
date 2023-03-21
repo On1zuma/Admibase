@@ -5,7 +5,7 @@ class DataController
     private $bdd;
     public function __construct()
     {
-        $this->bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', 'root', '');
+        $this->bdd = new PDO('mysql:host=localhost;dbname=gamedb;charset=utf8;', $_SESSION['username'], $_SESSION['password']);
     }
 
     public function listOurTables()

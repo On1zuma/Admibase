@@ -39,7 +39,7 @@ $tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
           <a href="form.php?table=<?php echo  $tableUrl ?>" type="button" class="btn btn-primary text-white"><span class="glyphicon glyphicon-remove"></span> Create</a>
           <button id="delete-btn" type="submit" class="btn btn-danger text-white"><span class="glyphicon glyphicon-remove"></span> Delete</button></div>
       </div>
-
+      <div  style="overflow: auto;" >
       <table class="table">
         <thead>
           <tr>
@@ -68,8 +68,10 @@ $tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
                 echo "</tr>";
             }
 ?>
-        </tbody>
-      </table>
+          </tbody>
+        </table>  
+      </div>
+
     </form>
 
     <nav aria-label="Page navigation example">
