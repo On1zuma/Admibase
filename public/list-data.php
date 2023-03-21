@@ -25,11 +25,10 @@ if (isset($_GET["search"])) {
 
 $tableUrlWithSpaces = str_replace('_', ' ', $tableUrl);
 
-if(isset($_GET['page'])){
-  $pg = $_GET['page'];
-}
-else{
-  $pg = 1;
+if (isset($_GET['page'])) {
+    $pg = $_GET['page'];
+} else {
+    $pg = 1;
 }
 
 
@@ -88,18 +87,41 @@ else{
     </form>
 
     <nav aria-label="Page navigation example">
-      <ul class="pagination m-3">
-        <li class="page-item user-select-none <?php if($pg <= 1) echo 'disabled';?>"><a class="page-link" href="list-data.php?table=<?php echo $tableUrl;?>&page=<?php echo $pg-1;if(isset($_GET['order'])){echo '&order='.$_GET['order'].'&column='.$_GET['column'];}if(isset($_GET['search'])){echo '&search='.$_GET['search'];}?>">Previous</a></li>
-        <li class="page-item" style="<?php if($pg <= 2) echo 'display:none;'; ?>"><a class="page-link" href="list-data.php?table=<?php echo $tableUrl;?>&page=<?php echo $pg-2;if(isset($_GET['order'])){echo '&order='.$_GET['order'].'&column='.$_GET['column'];}if(isset($_GET['search'])){echo '&search='.$_GET['search'];}?>"><?php echo $pg-2;?></a></li>
-        <li class="page-item" style="<?php if($pg <= 1) echo 'display:none;'; ?>"><a class="page-link" href="list-data.php?table=<?php echo $tableUrl;?>&page=<?php echo $pg-1;if(isset($_GET['order'])){echo '&order='.$_GET['order'].'&column='.$_GET['column'];}if(isset($_GET['search'])){echo '&search='.$_GET['search'];}?>"><?php echo $pg-1;?></a></li>
-        <li class="page-item"><a class="page-link bg-primary text-white" href="#"><?php echo $pg;?></a></li>
-        <li class="page-item"><a class="page-link" href="list-data.php?table=<?php echo $tableUrl;?>&page=<?php echo $pg+1;if(isset($_GET['order'])){echo '&order='.$_GET['order'].'&column='.$_GET['column'];}if(isset($_GET['search'])){echo '&search='.$_GET['search'];}?>"><?php echo $pg+1;?></a></li>
-        <li class="page-item"><a class="page-link" href="list-data.php?table=<?php echo $tableUrl;?>&page=<?php echo $pg+2;if(isset($_GET['order'])){echo '&order='.$_GET['order'].'&column='.$_GET['column'];}if(isset($_GET['search'])){echo '&search='.$_GET['search'];}?>"><?php echo $pg+2;?></a></li>
-        <li class="page-item"><a class="page-link" href="list-data.php?table=<?php echo $tableUrl;?>&page=<?php echo $pg+1;if(isset($_GET['order'])){echo '&order='.$_GET['order'].'&column='.$_GET['column'];}if(isset($_GET['search'])){echo '&search='.$_GET['search'];}?>">Next</a></li>
-      </ul>
-    </nav>
-</div>
+    <ul class="pagination m-3">
+        <li class="page-item user-select-none <?php echo ($pg <= 1) ? 'disabled' : ''; ?>">
+            <a class="page-link" href="<?php echo generatePaginationLink($tableUrl, $pg-1); ?>">Previous</a>
+        </li>
+        <?php
+        for ($i = $pg-2; $i <= $pg+2; $i++) {
+            if ($i < 1) {
+                continue;
+            }
+            ?>
+        <li class="page-item <?php echo ($i == $pg) ? 'active' : ''; ?>">
+            <a class="page-link" href="<?php echo generatePaginationLink($tableUrl, $i); ?>"><?php echo $i; ?></a>
+        </li>
+        <?php } ?>
+        <li class="page-item">
+            <a class="page-link" href="<?php echo generatePaginationLink($tableUrl, $pg+1); ?>">Next</a>
+        </li>
+    </ul>
+</nav>
 
+<?php
+function generatePaginationLink($tableUrl, $page)
+{
+    $params = array('table' => $tableUrl, 'page' => $page);
+    if (isset($_GET['order'])) {
+        $params['order'] = $_GET['order'];
+        $params['column'] = $_GET['column'];
+    }
+    if (isset($_GET['search'])) {
+        $params['search'] = $_GET['search'];
+    }
+    return 'list-data.php?' . http_build_query($params);
+}
+?>
+</div>
 
 <style>.list-group {line-height:30px}
 .pull-right{
