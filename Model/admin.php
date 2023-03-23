@@ -48,6 +48,10 @@ class Admin
                 // Se connecter avec l'utilisateur
                 $this->user = $username;
                 $this->password = $userpassword;
+                // Store CSRF token in user's session
+                $csrf_token = bin2hex(random_bytes(32));
+                $_SESSION['csrf_token'] = $csrf_token;
+
                 $_SESSION['username'] = $this->user;
                 $_SESSION['password'] = $this->password;
                 @mysqli_connect($this->host, $this->user, $this->password, $this->database);
