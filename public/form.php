@@ -36,12 +36,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form method="POST">
         <?php foreach ($rows[0] as $label => $value) { ?>
         <div class="form-group">
+            <?php if ($label != 'id') { ?>
             <label for="<?php echo $label; ?>"><?php echo $label; ?></label>
-            <?php if (strpos($label, 'id') !== false) { ?>
+            <?php } ?>
+            <?php if ($label == 'id') { ?>
+            <input  type="hidden" class="form-control" id="<?php echo $label; ?>" aria-describedby="<?php echo $label; ?>" name="<?php echo $label; ?>" value="1">
+            <?php } elseif (stripos($label, 'id') !== false) { ?>
             <input  type="number" class="form-control" id="<?php echo $label; ?>" aria-describedby="<?php echo $label; ?>" name="<?php echo $label; ?>" value="<?php echo $value; ?>">
-            <?php } elseif (strpos($label, 'date') !== false) { ?>
+            <?php } elseif (stripos($label, 'date') !== false) { ?>
             <input type="date" class="form-control" id="<?php echo $label; ?>" aria-describedby="<?php echo $label; ?>" name="<?php echo $label; ?>" value="<?php echo $value; ?>">
-            <?php } elseif (strpos($label, 'time') !== false) { ?>
+            <?php } elseif (stripos($label, 'time') !== false) { ?>
             <input type="time" class="form-control" id="<?php echo $label; ?>" aria-describedby="<?php echo $label; ?>" name="<?php echo $label; ?>" value="<?php echo $value; ?>">
             <?php } else { ?>
             <input type="text" class="form-control" id="<?php echo $label; ?>" aria-describedby="<?php echo $label; ?>" name="<?php echo $label; ?>" value="<?php echo $value; ?>">
