@@ -15,7 +15,7 @@ $tables = $pdo->query("SHOW TABLES WHERE Engine = 'MyISAM'")->fetchAll(PDO::FETC
 // Pour chaque table
 foreach ($tables as $table) {
   // Inspection
-  $pdo->query("CHECK TABLE $table EXTENDED")->execute();
+  $pdo->query("CHECK TABLE $table MEDIUM")->execute();
   $pdo->query("REPAIR TABLE $table")->execute();
   
   // Optimisation
@@ -24,5 +24,6 @@ foreach ($tables as $table) {
   // Défragmentation
   $pdo->query("ANALYZE TABLE $table")->execute();
 }
+
 #crontab -e
-#0 0 1 * * /usr/bin/php /chemin/vers/le/tache_auto_extented.php || logger -t tache_auto_extented "La tâche cron a échoué"
+#0 3 * * * /usr/bin/php /chemin/vers/le/repair_mysql_medium.php || logger -t repair_mysql_medium "La tâche cron a échoué"
