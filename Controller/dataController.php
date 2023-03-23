@@ -47,9 +47,17 @@ class DataController
 
     public function listOfTableName($tableUrl)
     {
-        // Get the column names for a table
-        $tableName = $tableUrl;
-        $stmt = $this->bdd->query("DESCRIBE $tableName");
+        // Prepare the table name for the query
+        $tableName = filter_var($tableUrl, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $tableName = preg_replace('/[^a-zA-Z0-9_]/', '', $tableName);
+
+        // Prepare the query
+        $stmt = $this->bdd->prepare("DESCRIBE $tableName");
+
+        // Execute the query
+        $stmt->execute();
+
+        // Fetch the results
         $columns = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $columns[] = $row['Field'];
@@ -62,7 +70,11 @@ class DataController
     {
         $offset = $this->pagination();
         $tableName = $tableUrl;
-        $stmt = $this->bdd->query("SELECT * FROM $tableName LIMIT 10 OFFSET $offset");
+        $sql = "SELECT * FROM $tableName LIMIT 10 OFFSET :offset";
+        $stmt = $this->bdd->prepare($sql);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+
         $rows = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $rows[] = $row;
@@ -70,38 +82,51 @@ class DataController
         return $rows;
     }
 
+
     public function listOfRowNameWithFilter($tableUrl, $column, $order)
     {
         $offset = $this->pagination();
         $tableName = $tableUrl;
-        $stmt = $this->bdd->query("SELECT * FROM $tableName ORDER BY $column $order LIMIT 10 OFFSET $offset");
+        $sql = "SELECT * FROM $tableName ORDER BY $column $order LIMIT 10 OFFSET :offset";
+        $stmt = $this->bdd->prepare($sql);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+
         $rows = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $rows[] = $row;
         }
         return $rows;
     }
+
+
     public function listOfRowNameWithSearch($tableUrl, $search)
     {
         $offset = $this->pagination();
 
         $tableName = $tableUrl;
         $columns = $this->listOfTableName($tableUrl);
-       
+
         $sql = "SELECT * FROM $tableName WHERE ";
         $conditions = array();
+        $params = array();
         foreach ($columns as $colonne) {
-            $conditions[] = $colonne . " LIKE '%" . $search . "%'";
+            $conditions[] = $colonne . " LIKE ?";
+            $params[] = '%' . $search . '%';
         }
         $sql .= implode(' OR ', $conditions);
         $sql = $sql." LIMIT 10 OFFSET $offset";
-        $stmt = $this->bdd->query($sql);
+
+        $stmt = $this->bdd->prepare($sql);
+        $stmt->execute($params);
+
         $rows = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $rows[] = $row;
         }
         return $rows;
     }
+
 
     public function listOfRowNameWithId($tableUrl, $id)
     {
@@ -193,20 +218,19 @@ class DataController
         return true;
     }
 
-    public function pagination(){
+    public function pagination()
+    {
         $page = 1;
         $offset = 0;
-        if(isset($_GET['page'])){
+        if (isset($_GET['page'])) {
             $page = $_GET['page'];
-        }
-        else{
+        } else {
             $page = 1;
         }
 
-        if($page == 1){
+        if ($page == 1) {
             $offset = 0;
-        }
-        else{
+        } else {
             $offset = ($page - 1) * 10;
         }
 

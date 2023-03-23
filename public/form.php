@@ -17,32 +17,49 @@ if (isset($_GET['id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $formData = $_POST;
-    if (isset($_GET['id'])) {
-        $id = $_GET['id'];
-        $data->updateRow($tableUrl, $id, $formData);
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die('CSRF token validation failed.');
     } else {
-        $data->insertRow($tableUrl, $formData);
+        unset($formData['csrf_token']);
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $data->updateRow($tableUrl, $id, $formData);
+        } else {
+            $data->insertRow($tableUrl, $formData);
+        }
     }
 }
 
 ?>
-
 <div class="mx-auto" style="width: 70vw; margin-top: 2rem;">
+    <div class="filter" style="margin-bottom: 1rem; display:flex; align-items:center; flex-direction:row; justify-content:space-between;">
+        <span class="label label-default" style="display:block; font-weight: 900; text-transform: uppercase; margin-bottom:.6rem;"><i class="fa-solid fa-pen-to-square"></i> <?php if (isset($_GET['id'])) {
+            echo "Update Existing Data Form";
+        } else {
+            echo "New Data Creation Form";
+        }?></span>
+        <a href="list-data.php?table=<?php echo $_GET['table'] ?>"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+    </div>
     <form method="POST">
         <?php foreach ($rows[0] as $label => $value) { ?>
         <div class="form-group">
+            <?php if ($label != 'id') { ?>
             <label for="<?php echo $label; ?>"><?php echo $label; ?></label>
-            <?php if (strpos($label, 'id') !== false) { ?>
-            <input type="number" class="form-control" id="<?php echo $label; ?>" aria-describedby="<?php echo $label; ?>" name="<?php echo $label; ?>" value="<?php echo $value; ?>">
-            <?php } elseif (strpos($label, 'date') !== false) { ?>
+            <?php } ?>
+            <?php if ($label == 'id') { ?>
+            <input  type="hidden" class="form-control" id="<?php echo $label; ?>" aria-describedby="<?php echo $label; ?>" name="<?php echo $label; ?>" value="1">
+            <?php } elseif (stripos($label, 'id') !== false) { ?>
+            <input  type="number" class="form-control" id="<?php echo $label; ?>" aria-describedby="<?php echo $label; ?>" name="<?php echo $label; ?>" value="<?php echo $value; ?>">
+            <?php } elseif (stripos($label, 'date') !== false) { ?>
             <input type="date" class="form-control" id="<?php echo $label; ?>" aria-describedby="<?php echo $label; ?>" name="<?php echo $label; ?>" value="<?php echo $value; ?>">
-            <?php } elseif (strpos($label, 'time') !== false) { ?>
+            <?php } elseif (stripos($label, 'time') !== false) { ?>
             <input type="time" class="form-control" id="<?php echo $label; ?>" aria-describedby="<?php echo $label; ?>" name="<?php echo $label; ?>" value="<?php echo $value; ?>">
             <?php } else { ?>
             <input type="text" class="form-control" id="<?php echo $label; ?>" aria-describedby="<?php echo $label; ?>" name="<?php echo $label; ?>" value="<?php echo $value; ?>">
             <?php } ?>
         </div>
         <?php } ?>
+        <input type="hidden" class="form-control" id="<?php echo $_SESSION['csrf_token']; ?>" aria-describedby="<?php echo $_SESSION['csrf_token'] ?>" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
