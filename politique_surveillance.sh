@@ -1,8 +1,8 @@
 #Écrire tables et fichiers de journalisation sur disque :
-mysqladmin -u user -ppassword refresh
+mysqladmin -u tache_automatisee -p tacheAutosecurite refresh
 #surveillance des threads
-mysqladmin -u user -ppassword processlist
+mysqladmin -u tache_automatisee -p tacheAutosecurite processlist
  #Surveillance des variables
-mysqladmin -u user -ppassword variables 
+mysqladmin -u tache_automatisee -p tacheAutosecurite variables 
  #crontab -e
-#0 1 * * * /usr/bin/php /chemin/vers/le/politique_surveillance.php
+#0 1 * * * /usr/bin/php /chemin/vers/le/politique_surveillance.php || logger -t politique_surveillance "La tâche cron a échoué"
