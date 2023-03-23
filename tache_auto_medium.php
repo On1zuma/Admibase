@@ -26,4 +26,4 @@ foreach ($tables as $table) {
 }
 
 #crontab -e
-#0 3 * * * /usr/bin/php /chemin/vers/le/tache_auto_medium.php
+#0 3 * * * /usr/bin/php /chemin/vers/le/tache_auto_medium.php || logger -t tache_auto_medium "La tâche cron a échoué"

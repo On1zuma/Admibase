@@ -7,6 +7,9 @@ mysqladmin -u root -p  extended-status | grep -E 'Max_used_connections|Threads_c
 # montre les privilèges systèmes
 SHOW PRIVILEGES
 
+#crontab -e
+#0 2 * * * /usr/bin/php /chemin/vers/le/journalisation.php
+
 #Ouvrir le fichier de configuration my.cnf :
 sudo nano /etc/mysql/my.cnf
 #Ajouter les options de journalisation dans le fichier :

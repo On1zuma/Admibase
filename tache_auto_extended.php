@@ -25,4 +25,4 @@ foreach ($tables as $table) {
   $pdo->query("ANALYZE TABLE $table")->execute();
 }
 #crontab -e
-#0 0 1 * * /usr/bin/php /chemin/vers/le/tache_auto_extented.php
+#0 0 1 * * /usr/bin/php /chemin/vers/le/tache_auto_extented.php || logger -t tache_auto_extented "La tâche cron a échoué"

@@ -5,4 +5,4 @@ mysqladmin -u user -ppassword processlist
  #Surveillance des variables
 mysqladmin -u user -ppassword variables 
  #crontab -e
-#0 1 * * * /usr/bin/php /chemin/vers/le/tache_auto_medium.php
+#0 1 * * * /usr/bin/php /chemin/vers/le/politique_surveillance.php
