@@ -28,9 +28,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <nav class="navbar navbar-dark bg-primary">
   <a class="navbar-brand" href="index.php">AdmiBase</a>
-
   <ul class="navbar-nav mr-auto" style="display:flex; flex-direction:row; gap:1rem;">
-   
     <?php if (!isset($_SESSION['id'])): // check if user is not login so we show that link?>
     <li class="nav-item active">
         <a class="nav-link" href="index.php"> Home</a>
@@ -54,6 +52,10 @@ if (session_status() === PHP_SESSION_NONE) {
         <a class="nav-link" href="logout.php"> Logout</a>
     </li>
     <?php endif; ?>
-
   </ul>
+<?php if (isset($_SESSION['id'])) { // check if user is logged in so we only show that links?>
+    <div>
+        <span style="cursor:default; color:white;" class="nav-link" href="index.php"><i class="fa-solid fa-user"></i> <?php echo $_SESSION['username'] ?></span>
+    </div>
+<?php } ?>
 </nav>
