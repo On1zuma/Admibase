@@ -25,13 +25,5 @@ foreach ($tables as $table) {
   $pdo->query("ANALYZE TABLE $table")->execute();
 }
 
-#Écrire les tables sur disque :
- mysqladmin -u user -ppassword flush-tables
- mysql> FLUSH TABLES
-#Écrire les fichiers de journalisation :
- mysqladmin -u user -ppassword flush-logs
- mysql> FLUSH LOGS;
-#Écrire tables et fichiers de journalisation sur disque :
- mysqladmin -u user -ppassword refresh
 #crontab -e
 #0 3 * * * /usr/bin/php /chemin/vers/le/tache_auto_medium.php
