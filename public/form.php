@@ -31,8 +31,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 ?>
-
+<!-- href="list-data.php?table=<?php echo $_GET['table'] ?>" -->
 <div class="mx-auto" style="width: 70vw; margin-top: 2rem;">
+    <div class="filter" style="margin-bottom: 1rem; display:flex; align-items:center; flex-direction:row; justify-content:space-between;">
+        <span class="label label-default" style="display:block; font-weight: 900; text-transform: uppercase; margin-bottom:.6rem;"><i class="fa-solid fa-pen-to-square"></i> <?php if (isset($_GET['id'])) {
+            echo "Update Existing Data Form";
+        } else {
+            echo "New Data Creation Form";
+        }?></span>
+        <a href="list-data.php?table=<?php echo $_GET['table'] ?>"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+    </div>
     <form method="POST">
         <?php foreach ($rows[0] as $label => $value) { ?>
         <div class="form-group">

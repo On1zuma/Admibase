@@ -49,7 +49,7 @@ if (isset($_GET['page'])) {
   </div>
     <form method="POST" action="delete.php?table=<?php echo $tableUrl ?>">
       <div class="filter" style="margin-bottom: 1rem; display:flex; align-items:center; flex-direction:row; justify-content:space-around;">
-        <span class="label label-default" style="font-weight: 900; text-transform: uppercase;"><?php echo $tableUrlWithSpaces;  ?></span>
+        <span class="label label-default" style="font-weight: 900; text-transform: uppercase;"><i class="fa-solid fa-database"></i> <?php echo $tableUrlWithSpaces;  ?></span>
         <div style="display:flex; align-items:center; flex-direction:row; justify-content:space-between; gap:1rem">
           <a href="form.php?table=<?php echo  $tableUrl ?>" type="button" class="btn btn-primary text-white"> Create</a>
           <button id="delete-btn" type="submit" class="btn btn-danger text-white">Delete</button></div>
