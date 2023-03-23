@@ -2,8 +2,8 @@
 
 // Configuration de la base de données
 $host = 'localhost';
-$user = 'root';
-$password = '';
+$user = 'tache_automatisee';
+$password = 'tacheAutosecurite';
 $dbname = 'gamedb';
 
 // Connexion à la base de données
