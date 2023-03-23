@@ -31,7 +31,6 @@ if (isset($_GET['page'])) {
     $pg = 1;
 }
 
-
 ?>
   <div class="mx-auto" style="width: 100vw; margin-top: 2rem;">
   <form method="POST" action="search.php?table=<?php echo $tableUrl ?>">
@@ -61,9 +60,17 @@ if (isset($_GET['page'])) {
             <th scope="col">#</th>
             <?php foreach ($columns as $column) {
                 if ($order == "DESC") {
-                    echo '<th scope="col"><a href="list-data.php?table='.$tableUrl.'&column='.$column.'&order=ASC">'.$column.'</a></th>';
+                    if (isset($_GET['column']) &&$column == $_GET['column']) {
+                        echo '<th scope="col"><a href="list-data.php?table='.$tableUrl.'&column='.$column.'&order=ASC" style="white-space:nowrap;"><i class="fa-solid fa-caret-down"></i> '.$column.'</a></th>';
+                    } else {
+                        echo '<th scope="col"><a href="list-data.php?table='.$tableUrl.'&column='.$column.'&order=ASC">'.$column.'</a></th>';
+                    }
                 } else {
-                    echo '<th scope="col"><a href="list-data.php?table='.$tableUrl.'&column='.$column.'&order=DESC">'.$column.'</a></th>';
+                    if (isset($_GET['column']) && $column == $_GET['column']) {
+                        echo '<th scope="col"><a href="list-data.php?table='.$tableUrl.'&column='.$column.'&order=DESC" style="white-space:nowrap;"><i class="fa-solid fa-caret-up"></i> '.$column.'</a></th>';
+                    } else {
+                        echo '<th scope="col"><a href="list-data.php?table='.$tableUrl.'&column='.$column.'&order=DESC">'.$column.'</a></th>';
+                    }
                 }
             } ?>
             <th><a href=""></a></th>
@@ -137,7 +144,6 @@ if (isset($_GET['order'])) {
     </nav>
 </div>
 
-
 <style>.list-group {line-height:30px}
 .pull-right{
   position: absolute;
@@ -162,6 +168,6 @@ if (isset($_GET['order'])) {
   });
 </script>
 
-
 <?php include('./components/footer.php'); ?>
+
 
