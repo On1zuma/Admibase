@@ -5,4 +5,4 @@ mysqladmin -u tache_automatisee -p tacheAutosecurite processlist
  #Surveillance des variables
 mysqladmin -u tache_automatisee -p tacheAutosecurite variables 
  #crontab -e
-#0 1 * * * /usr/bin/php /chemin/vers/le/politique_surveillance.php || logger -t politique_surveillance "La tâche cron a échoué"
+#0 1 * * * /usr/bin/php /chemin/vers/le/SIBD/Maintenance/politique_surveillance.php || logger -t politique_surveillance "La tâche cron a échoué"

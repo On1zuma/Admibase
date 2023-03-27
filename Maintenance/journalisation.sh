@@ -8,7 +8,7 @@ mysqladmin -u tache_automatisee -p tacheAutosecurite extended-status | grep -E '
 SHOW PRIVILEGES
 
 #crontab -e
-#0 2 * * * /usr/bin/php /chemin/vers/le/journalisation.php || logger -t journalisation "La tâche cron a échoué"
+#0 2 * * * /usr/bin/php /chemin/vers/le/SIBD/Maintenance/journalisation.php || logger -t journalisation "La tâche cron a échoué"
 
 #Ouvrir le fichier de configuration my.cnf :
 sudo nano /etc/mysql/my.cnf
