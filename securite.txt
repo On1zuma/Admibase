@@ -1,0 +1,27 @@
+#Mettre unmot de passe sur root
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'LpWeb!25';
+
+#pour enregister la commande
+FLUSH PRIVILEGES;
+
+#Supprimer le second compte administrateur
+DELETE FROM user WHERE Host='hostname' AND user='root';
+
+#Interdire les connexions non identifiées
+DELETE FROM user WHERE Password='';
+
+#Supprimer la base test et toutes les bases commençant par test_
+DELETE FROM db WHERE db='test' OR db='test\_%';
+
+#interdire les connexions distantes
+bind-address = 127.0.0.1
+
+#Limiter le nombre de connexions simultanées au serveur :
+    # 100 connexions maximum au total
+    max_connections=100
+    # 1 utilisateur a le droit à 50 connexions au maximum
+    max_user_connections=50
+
+#Limiter les ports de max_connections
+sudo iptables -A INPUT -p tcp --dport 80 -s 127.0.0.1 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 80 -j DROP
