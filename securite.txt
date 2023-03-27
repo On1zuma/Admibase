@@ -21,3 +21,7 @@ bind-address = 127.0.0.1
     max_connections=100
     # 1 utilisateur a le droit à 50 connexions au maximum
     max_user_connections=50
+
+#Limiter les ports de max_connections
+sudo iptables -A INPUT -p tcp --dport 80 -s 127.0.0.1 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 80 -j DROP
