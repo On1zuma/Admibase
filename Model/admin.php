@@ -93,7 +93,7 @@ class Admin
                 $tableAndRights['access'] = ['INDEX'];
                 break;
             case 'tache_automatisee':
-                $tableAndRights['table'] = 'taches_auto';
+                $tableAndRights['table'] = 'taches_automatisees';
                 $tableAndRights['access'] = ['RELOAD, SHUTDOWN, PROCESS'];
                 break;
             case 'developpeur':

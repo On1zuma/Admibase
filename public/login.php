@@ -39,18 +39,18 @@ if (isset($_POST['send']) && empty($_SESSION['id'])) {
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Manager account</h5>
-                <p class="card-text">A manager is a person who is responsible for overseeing a team, department, or project within an organization.</p>
-                <p class="card-text">Login : xxxxx</p>
-                <p class="card-text">Password : xxxxx</p>
+                <p class="card-text">A client is a person who is responsible for two tables, concours, or journal_quotidien within an organization.</p>
+                <p class="card-text">Login : client</p>
+                <p class="card-text">Password : clientsecurite</p>
             </div>
         </div>
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">User account</h5>
-                <p class="card-text">Basic users typically have limited rights or permissions within a system, compared to higher-level users such as administrators or managers.</p>
-                <p class="card-text">Login : xxxxx</p>
-                <p class="card-text">Password : xxxxx</p>
+                <h5 class="card-title">Concours</h5>
+                <p class="card-text">Basic admin typically have limited rights or permissions within a system, compared to higher-level admins such as admin_db.</p>
+                <p class="card-text">Login : admin_concours</p>
+                <p class="card-text">Password : adminConcoursecurite</p>
             </div>
         </div>
     </div>
