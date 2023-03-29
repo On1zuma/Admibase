@@ -42,7 +42,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <?php
             if($_SESSION['id']['table'] == "*") { ?>         
         <li class="nav-item active">
-         <a class="nav-link" href="#"> PhpMyAdmin</a>
+         <a class="nav-link" href="/phpmyadmin"> PhpMyAdmin</a>
         </li>
     <?php } ?>
     <li class="nav-item active">
