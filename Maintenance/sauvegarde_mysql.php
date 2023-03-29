@@ -17,4 +17,4 @@ foreach ($tables as $table) {
 }
 
 //lancer le fichier une fois une fois
-//php sauvegarde_mysql.php
+//php /var/www/Admibase_SIBD/Maintenance/sauvegarde_mysql.php

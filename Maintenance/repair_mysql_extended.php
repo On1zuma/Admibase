@@ -25,4 +25,4 @@ foreach ($tables as $table) {
   $pdo->query("ANALYZE TABLE $table")->execute();
 }
 #crontab -e
-#0 0 1 * * /usr/bin/php /chemin/vers/le/SIBD/Maintenance/repair_mysql_extented.php || logger -t repair_mysql_extented "La tâche cron a échoué"
+#0 0 1 * * /usr/bin/php /var/www/Admibase_SIBD/Maintenance/repair_mysql_extented.php || logger -t repair_mysql_extented "La tâche cron a échoué"
