@@ -53,5 +53,5 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON gamedb.journal_quotidien TO 'editorialis
 --10)
 --Client pouvant visionner les données « concours » et « journal » :
 CREATE USER 'client'@'localhost' IDENTIFIED BY 'clientsecurite';
-GRANT SELECT ON gamedb.concours, gamedb.Concours TO 'client'@'localhost';
-GRANT SELECT ON gamedb.concours, gamedb.journal_quotidien TO 'client'@'localhost';
+GRANT SELECT ON gamedb.concours TO 'client'@'localhost';
+GRANT SELECT ON gamedb.journal_quotidien TO 'client'@'localhost';
