@@ -1,27 +1,28 @@
 ![admibasecodebanner](https://user-images.githubusercontent.com/23278834/227152693-709d81a2-9e83-4417-90dc-6666e7f40b0c.png)
 
+# Installation local
 
-# SIBD - Data list
+## SIBD - Data list
 
-## To launch the project without WAMP :
+### To launch the project without WAMP :
 
 - cd .\public\
 - php -S localhost:8000
   Warning, database will not work
 
-## BRANCH
+### BRANCH
 
 - git pull // to update
 - git switch branchName // to select the good branch
   Warning, please remember that you have to start from the main branch to select one of our branches.
 
-## WAMP - XAMP - MAMP
+### WAMP - XAMP - MAMP
 
 - Set up your project inside the "www" folder.
 - Launch Wamp, Xampp, or any other web server software you are using.
 - Then use the URL "http://localhost/SIBD/public/index.php" to access the project.
 
-## PUBLIC CONFIG
+### PUBLIC CONFIG
 
 - Pour utiliser les nouvelles url (elles ne sont pas obligatoire) il faut créer un virtualhost:
 
@@ -48,6 +49,8 @@ ou en allant ici : http://localhost/add_vhost.php
 http://adminbase/
 
 La page doit s'afficher.
+
+# Initialisation BDD
 
 ## TO CREATE A NEW USER
 
