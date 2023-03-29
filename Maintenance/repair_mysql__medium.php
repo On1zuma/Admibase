@@ -26,4 +26,4 @@ foreach ($tables as $table) {
 }
 
 #crontab -e
-#0 3 * * * /usr/bin/php /chemin/vers/le/repair_mysql_medium.php || logger -t repair_mysql_medium "La tâche cron a échoué"
+#0 3 * * * /usr/bin/php /var/www/Admibase_SIBD/Maintenance/repair_mysql_medium.php || logger -t repair_mysql_medium "La tâche cron a échoué"

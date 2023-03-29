@@ -15,4 +15,4 @@ foreach ($tables as $table) {
   $pdo->query("LOAD DATA INFILE '/home/mysqlbackup/$table.sql' INTO TABLE $table;")->execute();
 }
 #crontab -e
-#30 3 * * * /usr/bin/php /chemin/vers/le/SIBD/Maintenance/restaure_mysql.php || logger -t restaure_mysql "La tâche cron a échoué"
+#30 3 * * * /usr/bin/php /var/www/Admibase_SIBD/Maintenance/restaure_mysql.php || logger -t restaure_mysql "La tâche cron a échoué"
