@@ -50,13 +50,14 @@ class Admin
                 $this->password = $userpassword;
                 // Store CSRF token in user's session
                 $csrf_token = bin2hex(random_bytes(32));
-                $_SESSION['csrf_token'] = $csrf_token;
 
-                $_SESSION['username'] = $this->user;
-                $_SESSION['password'] = $this->password;
                 @mysqli_connect($this->host, $this->user, $this->password, $this->database);
+
                 if (!mysqli_connect_errno()) {
                     $table = $this->rightUser($username);
+                    $_SESSION['csrf_token'] = $csrf_token;
+                    $_SESSION['username'] = $this->user;
+                    $_SESSION['password'] = $this->password;
                     $_SESSION['id'] = $table;
                     echo "L'utilisateur $username est maintenant connecté";
                     header("Location: list-table.php");
