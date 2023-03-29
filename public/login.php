@@ -38,7 +38,7 @@ if (isset($_POST['send']) && empty($_SESSION['id'])) {
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Manager account</h5>
+                <h5 class="card-title">Client account</h5>
                 <p class="card-text">A client is a person who is responsible for two tables, concours, or journal_quotidien within an organization.</p>
                 <p class="card-text">Login : client</p>
                 <p class="card-text">Password : clientsecurite</p>
