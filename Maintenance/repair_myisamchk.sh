@@ -5,4 +5,4 @@ myisamchk -a -r –e
 #Optimiser, analyser :
 myisamchk -a -d
 #crontab -e
-#0 3 * * * /usr/bin/php /chemin/vers/le/repair_myisamchk.php || logger -t repair_myisamchk "La tâche cron a échoué"
+#0 3 * * * /var/www/Admibase_SIBD/Maintenance/repair_myisamchk.sh || logger -t repair_myisamchk "La tâche cron a échoué"
